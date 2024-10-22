@@ -1,8 +1,18 @@
 
 import Navbar from "../components/navbar/Navbar.tsx";
+import {Card, Container} from "react-bootstrap";
+import React from "react";
 
-export default function Layout() {
+const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return (
-            <Navbar/>
+        <><Navbar/>
+            <Container>
+                <Card className='mt-5 text-center'>
+                    {children}
+                </Card>
+            </Container>
+        </>
     )
 }
+
+export default MainLayout;

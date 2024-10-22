@@ -13,17 +13,18 @@ function App() {
   return (
       <>
           <MainLayout>
+              <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about-us" element={<AboutUs />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/logout" element={<Logout />} />
+                  <Route path="/profile" element={<UserProfile />} />
+                  <Route path="/orders" element={<UserOrders />} />
+              </Routes>
           </MainLayout>
 
-          <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about-us" element={<AboutUs />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/logout" element={<Logout />} />
-              <Route path="/profile" element={<UserProfile />} />
-              <Route path="/orders" element={<UserOrders />} />
-          </Routes>
+
       </>
 
   )

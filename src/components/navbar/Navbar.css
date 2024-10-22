@@ -1,5 +1,10 @@
 .navbar{
     height: 5rem;
+    z-index: 100;
+}
+
+.navbar-collapse{
+    background: white;
 }
 
 #navbar-logo {

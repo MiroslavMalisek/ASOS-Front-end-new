@@ -1,0 +1,61 @@
+.side-bar-container {
+    display: flex;
+    flex-direction: column; /* Default to a column layout */
+}
+
+.category-item {
+    flex: 1;
+    cursor: pointer;
+    background-color: #fcfefe;  /* Light gray background */
+    margin-top: 0.5rem;
+    border-radius: 5px;         /* Rounded corners */
+}
+
+.my-link {
+    text-decoration: none; /* Underline the text */
+    color: black;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.category-item:hover {
+    background: linear-gradient(to right, #e7eaf6, white 30%);
+    text-decoration: underline;
+}
+.category-item:hover .my-link {
+    text-decoration: underline;
+}
+
+/* When the viewport is small (sm) */
+@media (min-width: 576px) {
+    .side-bar-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap; /* Allow items to wrap */
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    .category-item {
+        flex: 1 0 45%; /* Two columns */
+        margin-top: 0;
+    }
+}
+
+/* When the viewport is medium (md) */
+@media (min-width: 992px) {
+    .side-bar-container {
+        display: flex; /* Reset to default display for md */
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 0;
+    }
+
+    .category-item {
+        flex: 1;
+        margin: 0;
+        border-radius: 0;
+        border-right: rgba(0, 0, 0, 0.12) solid 1px;
+    }
+}
