@@ -6,7 +6,7 @@ const SideBar = () => {
             <div className="category-item p-2">
                 <a href="/contact" className="my-link">First category</a>
             </div>
-            <div className="category-item p-2">
+            <div className="category-item p-2 align-content-center">
                 <a href="/contact" className="my-link">Second category</a>
             </div>
             <div className="category-item p-2">

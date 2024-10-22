@@ -1,0 +1,36 @@
+.items-list {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap into rows */
+    gap: 16px; /* Space between items */
+}
+
+.product-item {
+    padding: 16px;
+    text-align: center;
+    height: 25rem;
+    background: linear-gradient(to bottom, #fafafa, white 10%);
+    border: rgba(0, 0, 0, 0.12) solid 1px;
+    flex: 1 1 100%; /* Default for extra small (xs) devices, takes full width */
+    max-width: calc(100% - 16px); /* ensure that items in last row are the same width as in above rows */
+}
+
+@media (min-width: 768px) {
+    .product-item {
+        flex: 1 1 calc(50% - 16px); /* Two items per row */
+        max-width: calc(50% - 16px); /* ensure that items in last row are the same width as in above rows */
+    }
+}
+
+
+@media (min-width: 1200px) {
+
+    #number-products{
+        margin-left: 0;
+        margin-right: 1rem;
+    }
+
+    .product-item {
+        flex: 1 1 calc(33.33% - 16px); /* Four items per row */
+        max-width: calc(33.33% - 16px); /* ensure that items in last row are the same width as in above rows */
+    }
+}

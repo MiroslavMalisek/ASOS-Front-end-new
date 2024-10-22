@@ -1,6 +1,7 @@
 .side-bar-container {
     display: flex;
     flex-direction: column; /* Default to a column layout */
+    background-color: #fcfefe;  /* Light gray background */
 }
 
 .category-item {
@@ -20,7 +21,7 @@
 }
 
 .category-item:hover {
-    background: linear-gradient(to right, #e7eaf6, white 30%);
+    background: linear-gradient(to right, #eeeeee, white 30%);
     text-decoration: underline;
 }
 .category-item:hover .my-link {
@@ -50,12 +51,13 @@
         flex-direction: column;
         flex-wrap: nowrap;
         gap: 0;
+        border-right: rgba(0, 0, 0, 0.12) solid 1px;
     }
 
     .category-item {
         flex: 1;
         margin: 0;
         border-radius: 0;
-        border-right: rgba(0, 0, 0, 0.12) solid 1px;
+        max-height: 3rem;
     }
 }
