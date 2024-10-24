@@ -10,7 +10,7 @@ const SideBar = () => {
                 <a href="/contact" className="my-link">Second category</a>
             </div>
             <div className="category-item p-2">
-                <a href="/contact" className="my-link">Third category</a>
+                <a href="/contact" className="my-link">Third categoryededed</a>
             </div>
             <div className="category-item p-2">
                 <a href="/contact" className="my-link">Fourth category</a>
