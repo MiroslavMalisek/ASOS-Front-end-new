@@ -1,9 +1,9 @@
 import { Container } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { LoginForm } from "../components/form/LoginForm";
+import { RegisterForm } from "../components/form/RegisterForm";
 
-export function Login() {
+export function Register() {
   return (
     <>
       <Container
@@ -12,13 +12,11 @@ export function Login() {
           background: "linear-gradient(to bottom, #d5eeff, 50%, white 60%)",
           padding: "20px",
           borderRadius: "0.5rem",
-          position: "absolute",
-          transform: "translateY(15%)",
-          margin: "auto"
+          margin: "auto",
         }}
       >
-        <h1 className="text-center my-4">LOG IN</h1>
-        <LoginForm />
+        <h1 className="text-center my-4">REGISTER</h1>
+        <RegisterForm />
         <Row
           className="my-5 mx-auto align-items-center"
           style={{ maxWidth: "36rem" }}
@@ -34,7 +32,7 @@ export function Login() {
           </Col>
         </Row>
         <h6 className="text-center mb-5">
-          Don't have an account? <a href="/register">Sign up</a>
+          Have an account? <a href="/login">Log in</a>
         </h6>
       </Container>
     </>

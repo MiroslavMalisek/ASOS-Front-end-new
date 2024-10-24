@@ -7,6 +7,7 @@ import {Login} from "./pages/Login.tsx";
 import {Logout} from "./pages/Logout.tsx";
 import {UserProfile} from "./pages/UserProfile.tsx";
 import {UserOrders} from "./pages/UserOrders.tsx";
+import { Register } from './pages/Register.tsx';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/about-us" element={<AboutUs />} />
                   <Route path="/contact" element={<Contact />} />
+                  <Route path="/register" element={<Register/>}/>
                   <Route path="/login" element={<Login />} />
                   <Route path="/logout" element={<Logout />} />
                   <Route path="/profile" element={<UserProfile />} />
