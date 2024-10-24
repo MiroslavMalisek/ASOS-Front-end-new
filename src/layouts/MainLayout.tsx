@@ -9,12 +9,12 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <Container
         className="mb-5"
         style={{
-          marginTop: "120px",
+          marginTop: "7rem",
           borderRadius: "0.5rem",
           position: "relative"
         }}
       >
-        <Card style={{ border: "none" }}>{children}</Card>
+        <Card /*style={{ border: "none" }}*/>{children}</Card>
       </Container>
     </>
   );
