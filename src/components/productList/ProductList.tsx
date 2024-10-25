@@ -1,7 +1,8 @@
 import './ProductList.css'
-import ProductItem from "../productItem/ProductItem.tsx";
+import ProductItem from "../productItemInProductList/ProductItemInProductList.tsx";
 
 const ProductList = () => {
+
     return (
         <>
             <div className="name-container mb-4 d-flex align-items-start">

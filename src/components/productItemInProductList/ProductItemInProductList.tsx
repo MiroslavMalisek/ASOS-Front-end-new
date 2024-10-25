@@ -1,18 +1,19 @@
-import './ProductItem.css'
-import {Button, Card} from "react-bootstrap";
+import './ProductItemInProductList.css'
+import {Card} from "react-bootstrap";
 import iphonePhoto from './iphone.webp'
-import cartIcon from '../../assets/cart-fill.svg'
+import {Link} from "react-router-dom";
+import AddToCardButton from "../addToCartButton/AddToCardButton.tsx";
 
-const ProductList = () => {
+const ProductItemInProductList = () => {
     return (
         <Card className="product-item">
-            <a href="/contact" target="_blank" rel="noopener noreferrer">
+            <Link to='/product/1'>
                 <Card.Img className="product-image mx-auto" variant="top" src={iphonePhoto}/>
-            </a>
+            </Link>
             <Card.Body>
-                <a className="product-name-link" href="/about-us" target="_blank" rel="noopener noreferrer">
+                <Link to='/product/1' className="product-name-link">
                     <Card.Title className="product-name">iPhone 16 Pro Max 256 GB čierny titán</Card.Title>
-                </a>
+                </Link>
                 <Card.Text className="product-description">
                     Toto je krátky popis tohto produktu.
                     Some quick example text to build on the card title and make up the
@@ -20,10 +21,7 @@ const ProductList = () => {
                 </Card.Text>
                 <div className="price-cart-wrapper">
                     <span className="product-price">49.99 €</span>
-                    <Button className="add-to-cart-button">
-                        <img src={cartIcon} alt="Add to Cart" className="button-icon" />
-                        <span>Do košíka</span>
-                    </Button>
+                    <AddToCardButton />
                 </div>
             </Card.Body>
             <Card.Footer className="product-footer mt-2">Na sklade 5ks</Card.Footer>
@@ -35,4 +33,4 @@ const ProductList = () => {
     );
 };
 
-export default ProductList;
+export default ProductItemInProductList;

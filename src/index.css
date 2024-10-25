@@ -4,6 +4,11 @@
   font-weight: 400;
 
   --product-font-color: #113f67;
+  --in-stock-font-color: #388e3c;
+  --add-to-cart-background-color: #8cba51;
+  --add-to-cart-background-color-hover: #388e3c;
+  --product-price-font-color: #ff5959;
+  --out-stock-font-color: #63686e;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);

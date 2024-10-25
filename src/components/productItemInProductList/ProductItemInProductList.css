@@ -43,19 +43,9 @@
     white-space: nowrap;
     font-size: 1.5rem;   /* Slightly larger than regular text */
     font-weight: 700;     /* Medium font weight for a moderate emphasis */
-    color: #ff5959;
+    color: var(--product-price-font-color);
 }
 
-.add-to-cart-button {
-    white-space: nowrap;
-    display: flex;                /* Use flexbox to align items */
-    align-items: center;         /* Vertically center the items */
-    padding: 0.5rem 1rem;       /* Padding for the button */
-    background-color: #8cba51;  /* Background color */
-    color: white;                /* Text color */
-    border: none;                /* Remove default border */
-    border-radius: 4px;         /* Rounded corners */
-}
 
 .button-icon {
     width: 1.2rem;                 /* Set the width of the icon */
@@ -76,6 +66,6 @@
 
 .product-footer{
     background-color: white;
-    color: #388e3c;
+    color: var(--in-stock-font-color);
     font-weight: 500;
 }

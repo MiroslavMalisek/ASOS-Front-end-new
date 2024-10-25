@@ -1,0 +1,14 @@
+.add-to-cart-button {
+    white-space: nowrap;
+    display: flex;                /* Use flexbox to align items */
+    align-items: center;         /* Vertically center the items */
+    padding: 0.5rem 1rem;       /* Padding for the button */
+    background-color: var(--add-to-cart-background-color);  /* Background color */
+    color: white;                /* Text color */
+    border: none;                /* Remove default border */
+    border-radius: 4px;         /* Rounded corners */
+}
+
+.add-to-cart-button:hover {
+    background-color: var(--add-to-cart-background-color-hover);
+}
