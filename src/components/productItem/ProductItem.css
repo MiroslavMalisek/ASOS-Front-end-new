@@ -1,0 +1,81 @@
+.product-item{
+    padding: 1rem;
+    text-align: center;
+    background: linear-gradient(to bottom, #eeeeee, white 10%);
+    border-radius: 7px;
+    border: rgba(0, 0, 0, 0.12) solid 1px;
+}
+
+.product-image{
+    width: 50%;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+}
+
+.product-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--product-font-color);
+}
+
+.product-name-link{
+    text-decoration: none; /* Underline the text */
+}
+
+.product-name-link:hover .product-name {
+    text-decoration: underline;
+    text-decoration-color: var(--product-font-color);
+}
+
+.product-description{
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.price-cart-wrapper{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.product-price {
+    white-space: nowrap;
+    font-size: 1.5rem;   /* Slightly larger than regular text */
+    font-weight: 700;     /* Medium font weight for a moderate emphasis */
+    color: #ff5959;
+}
+
+.add-to-cart-button {
+    white-space: nowrap;
+    display: flex;                /* Use flexbox to align items */
+    align-items: center;         /* Vertically center the items */
+    padding: 0.5rem 1rem;       /* Padding for the button */
+    background-color: #8cba51;  /* Background color */
+    color: white;                /* Text color */
+    border: none;                /* Remove default border */
+    border-radius: 4px;         /* Rounded corners */
+}
+
+.button-icon {
+    width: 1.2rem;                 /* Set the width of the icon */
+    height: 1.2rem;                /* Set the height of the icon */
+    margin-right: 0.5rem;        /* Space between icon and text */
+}
+
+@media (min-width: 576px) {
+    .price-cart-wrapper{
+        flex-direction: column;
+        gap: 0.7rem;
+    }
+
+    .product-description{
+        margin-bottom: 1rem;
+    }
+}
+
+.product-footer{
+    background-color: white;
+    color: #388e3c;
+    font-weight: 500;
+}

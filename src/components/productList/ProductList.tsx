@@ -1,4 +1,5 @@
 import './ProductList.css'
+import ProductItem from "../productItem/ProductItem.tsx";
 
 const ProductList = () => {
     return (
@@ -8,27 +9,13 @@ const ProductList = () => {
                 <p id="number-products" className="mb-0 mt-2 ms-2">(500 produktov)</p>
             </div>
             <div className="items-list p-0">
-                <div className="product-item">
-                    iedjeoj
-                </div>
-                <div className="product-item">
-                    iedjeoj
-                </div>
-                <div className="product-item">
-                    iedjeoj
-                </div>
-                <div className="product-item">
-                    iedjeoj
-                </div>
-                <div className="product-item">
-                    iedjeoj
-                </div>
-                <div className="product-item">
-                    iedjeoj
-                </div>
-                <div className="product-item">
-                    iedjeoj
-                </div>
+                <ProductItem />
+                <ProductItem />
+                <ProductItem />
+                <ProductItem />
+                <ProductItem />
+                <ProductItem />
+                <ProductItem />
             </div>
         </>
 
