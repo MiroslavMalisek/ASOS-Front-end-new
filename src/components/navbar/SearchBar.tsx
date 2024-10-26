@@ -16,7 +16,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
     };
 
     return (
-        <Form id="search-bar-form" className="d-flex ms-5 me-5" onSubmit={(e) => e.preventDefault()}>
+        <Form id="search-bar-form" className="d-flex ms-5 me-5" onSubmit={(e) => {
+            e.preventDefault();
+            handleSearch(); // Trigger search on form submit (Enter key)
+        }}>
             <FormControl
                 id="search-bar"
                 type="search"
