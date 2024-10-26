@@ -35,86 +35,83 @@ export function RegisterForm({}: Props) {
     <Card className='mx-auto' style={{ maxWidth: "36rem" }}>
             <Card.Body>
                 <Form onSubmit={signUp}>
-                    <Row className='mb-3'>
-                        <Form.Group as={Col} className="mb-3" controlId="formHorizontalName">
+                    <Row className=''>
+                        <Form.Group as={Col} xs={12} md={6} className="mb-3" controlId="formHorizontalName">
                             <Col>
                                 <Form.Label className='ms-2 h6'>
-                                    Name
+                                    Meno
                                 </Form.Label>
                                 <Form.Control
                                     type='text'
                                     name='first_name'
                                     value={formData.first_name}
                                     onChange={handleInputChange}
-                                    placeholder="First name"
+                                    placeholder="Zadajte vaše meno"
                                     required={true}/>
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Col} className="mb-3" controlId="formHorizontalSurname">
+                        <Form.Group as={Col} xs={12} md={6} className="mb-3" controlId="formHorizontalSurname">
                             <Col>
                                 <Form.Label className='ms-2 h6'>
-                                    Surname
+                                    Priezvisko
                                 </Form.Label>
                                 <Form.Control
                                     type='text'
                                     name='last_name'
                                     value={formData.last_name}
                                     onChange={handleInputChange}
-                                    placeholder="Last name"
+                                    placeholder="Zadajte vaše priezvisko"
                                     required={true}/>
                             </Col>
                         </Form.Group>
                     </Row>
-
-                    <Form.Group className="mb-3" controlId="formHorizontalAddress">
-                        <Col>
-                            <Form.Label className='ms-2 h6'>
-                                Address
-                            </Form.Label>
+                    <Row>
+                        <Form.Group as={Col} xs={12} className="mb-3" controlId="formHorizontalAddress">
+                            <Form.Label className='ms-2 h6'>Adresa</Form.Label>
                             <Form.Control
                                 type='text'
                                 name='address'
                                 value={formData.address}
                                 onChange={handleInputChange}
-                                placeholder="Street num., Postcode City"
-                                required={true}/>
-                        </Col>
-                    </Form.Group>
+                                placeholder="Ulica a číslo, PSČ"
+                                required={true}
+                            />
+                        </Form.Group>
+                    </Row>
 
-                    <Form.Group className="mb-3" controlId="formHorizontalEmail">
-                        <Col>
-                            <Form.Label className='ms-2 h6'>
-                                Email
-                            </Form.Label>
+                    <Row>
+                        <Form.Group as={Col} xs={12} className="mb-3" controlId="formHorizontalEmail">
+                            <Form.Label className='ms-2 h6'>Email</Form.Label>
                             <Form.Control
                                 type='email'
                                 name='email'
                                 value={formData.email}
                                 onChange={handleInputChange}
                                 placeholder="example@mail.com"
-                                required={true}/>
-                        </Col>
-                    </Form.Group>
+                                required={true}
+                            />
+                        </Form.Group>
+                    </Row>
 
                     <Row className='mb-3'>
-                        <Form.Group as={Col} className="mb-3" controlId="formHorizontalPhone">
+                        <Form.Group as={Col} xs={12} md={6} className="mb-3" controlId="formHorizontalPhone">
                             <Col>
                                 <Form.Label className='ms-2 h6'>
-                                    Phone Number
+                                    Telefónne číslo
                                 </Form.Label>
                                 <Form.Control
                                     type='text'
                                     name='phone'
                                     value={formData.phone}
                                     onChange={handleInputChange}
-                                    placeholder="555-555-5555"
+                                    placeholder="+421..."
                                     required={true}/>
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Col} className="mb-3" controlId="formHorizontalPassword">
+                        <Form.Group as={Col} xs={12} md={6} className="mb-3" controlId="formHorizontalPassword">
                             <Col>
                                 <Form.Label className='ms-2 h6'>
-                                    Password
+                                    Heslo
                                 </Form.Label>
                                 <Form.Control
                                     type='password'
@@ -129,7 +126,7 @@ export function RegisterForm({}: Props) {
 
                     <Form.Group as={Row} className="mb-3 text-center">
                         <Col>
-                            <Button type="submit" /*onClick={(e) => signUp(e)}*/>Sign up</Button>
+                            <Button type="submit" /*onClick={(e) => signUp(e)}*/>Registrovať sa</Button>
                         </Col>
                     </Form.Group>
                 </Form>

@@ -53,7 +53,7 @@ export function LoginForm({}: Props) {
             controlId="formHorizontalPassword"
           >
             <Col>
-              <Form.Label className="ms-2 h6">Password</Form.Label>
+              <Form.Label className="ms-2 h6">Heslo</Form.Label>
               <Form.Control
                 type="password"
                 name="password"
@@ -65,16 +65,10 @@ export function LoginForm({}: Props) {
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} className="mb-3" controlId="formHorizontalCheck">
-            <Col>
-              <Form.Check label="Remember me" />
-            </Col>
-          </Form.Group>
-
           <Form.Group as={Row} className="mb-3 text-center">
             <Col>
               <Button type="submit" /*onClick={(e) => signIn(e)}*/>
-                Log in
+                Prihlásiť sa
               </Button>
             </Col>
           </Form.Group>
