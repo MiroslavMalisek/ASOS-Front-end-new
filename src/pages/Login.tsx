@@ -2,22 +2,13 @@ import { Container } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { LoginForm } from "../components/form/LoginForm";
+import '../styles/Login.css'
 
 export function Login() {
   return (
     <>
-      <Container
-        fluid
-        style={{
-          background: "linear-gradient(to bottom, #d5eeff, 50%, white 60%)",
-          padding: "20px",
-          borderRadius: "0.5rem",
-          position: "absolute",
-          transform: "translateY(15%)",
-          margin: "auto"
-        }}
-      >
-        <h1 className="text-center my-4">LOG IN</h1>
+      <Container fluid className="login-container">
+        <h3 className="text-center my-4">Prihlásenie</h3>
         <LoginForm />
         <Row
           className="my-5 mx-auto align-items-center"
@@ -27,14 +18,14 @@ export function Login() {
             <hr />
           </Col>
           <Col xs="auto" className="text-center my-auto">
-            <span className="content">or</span>
+            <span className="content">alebo</span>
           </Col>
           <Col className="text-start ps-0">
             <hr />
           </Col>
         </Row>
         <h6 className="text-center mb-5">
-          Don't have an account? <a href="/register">Sign up</a>
+          Nemáte ešte účet? <a href="/register">Zaregistrujte sa</a>
         </h6>
       </Container>
     </>

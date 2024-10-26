@@ -1,0 +1,120 @@
+.custom-breadcrumb {
+    background-color: #f8f9fa; /* Light background */
+    border-radius: 0.25rem; /* Rounded corners */
+    padding: 1rem 1.5rem; /* Padding for better spacing */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.custom-breadcrumb ol{
+    margin: 0;
+}
+
+.breadcrumb-item a{
+
+    color: var(--product-font-color);
+    font-weight: 400;
+}
+
+.breadcrumb-item a:hover{
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.product-card {
+    padding: 1rem;
+    background: linear-gradient(to bottom, #eeeeee, 1%, white 2%);
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 0;
+    border-top: rgba(0, 0, 0, 0.12) solid 1px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.col-image{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.col-other {
+    margin-top: 1rem;
+}
+.product-image {
+    width: 75%;
+    cursor: pointer;
+}
+.product-view-name{
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: var(--product-font-color);
+}
+.product-view-description{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.product-view-stock {
+    color: var(--in-stock-font-color);
+    font-weight: 500;
+    align-content: center;
+}
+
+.product-view-price {
+    color: var(--product-price-font-color);
+    font-weight: 700;
+    align-content: center;
+}
+
+.product-price-cart-div{
+    display: flex;
+    flex-direction: row;
+}
+
+@media (max-width: 991px) {
+    .product-action-buttons {
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        border-top: rgba(0, 0, 0, 0.12) solid 1px;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-other{
+        margin-bottom: 1rem;
+    }
+
+    .product-view-name {
+        margin-top: 3rem;
+    }
+
+    .product-action-buttons {
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+        border-top: rgba(0, 0, 0, 0.12) solid 1px;
+        padding: 0 !important;
+        padding-top: 0.5rem !important;
+    }
+
+    .product-view-description{
+        margin-bottom: 5rem;
+    }
+
+    .product-view-stock {
+        font-size: 1.5rem;
+    }
+
+    .product-view-price {
+        font-size: 2rem;
+    }
+}
