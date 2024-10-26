@@ -1,0 +1,36 @@
+.contact-card{
+    padding: 1rem;
+}
+.contact-row {
+    display: flex;
+    flex-direction: column;
+}
+
+p{
+    margin-bottom: 0.3rem;
+}
+
+.contact-container {
+    display: flex;
+    margin-top: 1rem;
+    align-items: center;
+}
+
+.opening-hours {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.map-container {
+    height: 25rem;
+}
+
+@media (min-width: 992px) {
+    .contact-row{
+        flex-direction: row;
+    }
+
+    .map-container{
+        height: 30rem;
+    }
+}

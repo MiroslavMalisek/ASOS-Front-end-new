@@ -16,19 +16,19 @@ function App() {
   return (
       <>
           <HelmetProvider>
-              <MainLayout>
-                  <Routes>
-                      <Route path="/" element={<Home />} />
-                      <Route path="/product/:id" element={<Product />} />
-                      <Route path="/about-us" element={<AboutUs />} />
-                      <Route path="/contact" element={<Contact />} />
-                      <Route path="/register" element={<Register/>}/>
-                      <Route path="/login" element={<Login />} />
-                      <Route path="/logout" element={<Logout />} />
-                      <Route path="/profile" element={<UserProfile />} />
-                      <Route path="/orders" element={<UserOrders />} />
-                  </Routes>
-              </MainLayout>
+                  <MainLayout>
+                      <Routes>
+                          <Route path="/" element={<Home />} />
+                          <Route path="/product/:id" element={<Product />} />
+                          <Route path="/about-us" element={<AboutUs />} />
+                          <Route path="/contact" element={<Contact />} />
+                          <Route path="/register" element={<Register/>}/>
+                          <Route path="/login" element={<Login />} />
+                          <Route path="/logout" element={<Logout />} />
+                          <Route path="/profile" element={<UserProfile />} />
+                          <Route path="/orders" element={<UserOrders />} />
+                      </Routes>
+                  </MainLayout>
           </HelmetProvider>
       </>
 
