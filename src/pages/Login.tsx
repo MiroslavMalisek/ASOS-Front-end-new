@@ -11,7 +11,7 @@ export function Login() {
         <h3 className="text-center my-4">Prihlásenie</h3>
         <LoginForm />
         <Row
-          className="my-5 mx-auto align-items-center"
+          className="mt-4 mb-4 mx-auto align-items-center"
           style={{ maxWidth: "36rem" }}
         >
           <Col className="text-end pe-0">
@@ -25,7 +25,7 @@ export function Login() {
           </Col>
         </Row>
         <h6 className="text-center mb-5">
-          Nemáte ešte účet? <a href="/register">Zaregistrujte sa</a>
+          Nemáte ešte účet? <a className="log-reg-link" href="/register">Zaregistrujte sa</a>
         </h6>
       </Container>
     </>

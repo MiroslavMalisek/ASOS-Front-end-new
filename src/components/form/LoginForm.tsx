@@ -1,84 +1,75 @@
 import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
-import {useEffect, useState} from 'react';
+import './Form.css'
+import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {LoginFormDataInterface} from './LoginFormDataInterface.ts'
+import {Spinner} from "react-bootstrap";
 
 type Props = {};
 
 export function LoginForm({}: Props) {
-  const [server_public_key, setServerPublicKey] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState({
-    message: ""
-  });
-  const [login_success, setLoginSuccess] = useState(false);
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
 
-  const signIn = (e: any) => {
-    e.preventDefault();
-  };
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState({
+        message: ""
+    });
+    const [login_success, setLoginSuccess] = useState(false);
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState<LoginFormDataInterface>({
+        email: "",
+        password: "",
+    })
 
-  const handleInputChange = (e: any) => {
-    e.preventDefault();
-  }
+    const signIn = (e: any) => {
+        e.preventDefault();
+        setLoading(true)
+        setTimeout(() => {
+            console.log("Data:", formData);
+            setLoading(false);
+        }, 2000);
+    };
 
-  return (
-    <Card className="mx-auto" style={{ maxWidth: "36rem" }}>
-      <Card.Body>
-        <Form onSubmit={signIn}>
-          <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-            <Col>
-              <Form.Label className="ms-2 h6">Email</Form.Label>
-              <Form.Control
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                placeholder="example@mail.com"
-                required={true}
-              />
-            </Col>
-          </Form.Group>
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    }
 
-          <Form.Group
-            as={Row}
-            className="mb-3"
-            controlId="formHorizontalPassword"
-          >
-            <Col>
-              <Form.Label className="ms-2 h6">Heslo</Form.Label>
-              <Form.Control
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                placeholder="***************"
-                required={true}
-              />
-            </Col>
-          </Form.Group>
+    return (
+        <Card className="mx-auto" style={{ maxWidth: "36rem" }}>
+            <Card.Body>
+                <Form onSubmit={signIn}>
+                    <Form.Group className="mb-3" controlId="formGroupEmail">
+                        <Form.Label className='h6'>Email</Form.Label>
+                        <Form.Control type="email" name="email" value={formData.email} onChange={handleChange}
+                                      placeholder="example@mail.com" required={true}/>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formGroupPassword">
+                        <Form.Label className='h6'>Heslo</Form.Label>
+                        <Form.Control type="password" name="password" value={formData.password} onChange={handleChange}
+                                      placeholder="***************" required={true}/>
+                    </Form.Group>
 
-          <Form.Group as={Row} className="mb-3 text-center">
-            <Col>
-              <Button type="submit" /*onClick={(e) => signIn(e)}*/>
-                Prihlásiť sa
-              </Button>
-            </Col>
-          </Form.Group>
-        </Form>
-        {loading && <p>Sending data...</p>}
-        {error && <p>{error.message}</p>}
-        {!loading && login_success && (
-          <p>{sessionStorage.getItem("session_token")}</p>
-        )}
-      </Card.Body>
-    </Card>
-  );
+                    {loading ? (
+                        <div className="form-submit-div">
+                            <Spinner animation="border" className="spinner my-3" />
+                        </div>
+
+                    ) : (
+                        <div className="form-submit-div">
+                            <Button type="submit" className="form-submit-button my-3">Prihlásiť sa</Button>
+                        </div>
+                    )}
+                </Form>
+                {error && <p>{error.message}</p>}
+                {!loading && login_success && (
+                    <p>{sessionStorage.getItem("session_token")}</p>
+                )}
+            </Card.Body>
+        </Card>
+    );
 }

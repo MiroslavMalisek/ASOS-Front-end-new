@@ -6,3 +6,9 @@
     transform: translateY(15%);
     margin: auto;*/
 }
+.log-reg-link {
+    color: var(--out-stock-font-color);
+}
+.log-reg-link:hover {
+    color: var(--product-font-color);
+}

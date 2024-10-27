@@ -2,6 +2,7 @@ import { Container } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { RegisterForm } from "../components/form/RegisterForm";
+import "../styles/Login.css"
 
 export function Register() {
   return (
@@ -10,7 +11,7 @@ export function Register() {
         <h3 className="text-center my-4">Registrácia</h3>
         <RegisterForm />
         <Row
-          className="my-5 mx-auto align-items-center"
+          className="mt-4 mb-4 mx-auto align-items-center"
           style={{ maxWidth: "36rem" }}
         >
           <Col className="text-end pe-0">
@@ -24,7 +25,7 @@ export function Register() {
           </Col>
         </Row>
         <h6 className="text-center mb-5">
-          Už ste zaregistrovaný? <a href="/login">Prihláste sa</a>
+          Už ste zaregistrovaný? <a className="log-reg-link" href="/login">Prihláste sa</a>
         </h6>
       </Container>
     </>
