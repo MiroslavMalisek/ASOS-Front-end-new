@@ -1,0 +1,37 @@
+.orders-accordion-summary{
+    background: #f9f9f9 !important;
+}
+
+.orders-list-item {
+    background: #f9f9f9;
+}
+
+.orders-list-image{
+    max-height: 3rem;
+}
+.orders-list-image:hover{
+    border: rgba(0, 0, 0, 0.15) solid 2px;
+}
+
+.orders-list-item-info{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.order-number{
+    color: var(--product-font-color);
+    font-weight: 700;
+    margin-left: 0.5rem;
+}
+
+.order-price{
+    color: var(--product-price-font-color);
+    font-weight: 700;
+}
+
+.orders-list-item-products-images{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}

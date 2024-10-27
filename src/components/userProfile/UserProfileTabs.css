@@ -1,0 +1,38 @@
+.tabs .nav-item{
+    width: 30%;
+}
+
+.tabs .nav-item button{
+    width: 100%
+}
+
+.tabs .nav-link.active{
+    color: var(--product-font-color);
+    font-weight: 600;
+}
+
+.tabs .nav-link:not(.active){
+    color: var(--product-font-color);
+    font-weight: 400;
+}
+
+@media (min-width: 768px) {
+    .tabs .nav-item{
+        width: 20%;
+    }
+}
+
+.user-profile-button{
+    width: 100%;
+    background-color: var(--product-font-color);
+    border: 2px solid var(--product-font-color);
+}
+
+.user-profile-button:hover{
+    border: 2px solid var(--in-stock-font-color);
+    background-color: var(--product-font-color);
+}
+
+.spinner{
+    color: var(--product-font-color);
+}
