@@ -32,3 +32,7 @@
     border: 2px solid var(--in-stock-font-color);
     background-color: var(--product-font-color);
 }
+
+.spinner{
+    color: var(--product-font-color);
+}

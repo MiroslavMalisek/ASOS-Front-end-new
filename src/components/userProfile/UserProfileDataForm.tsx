@@ -1,9 +1,12 @@
-import {Button, Form} from "react-bootstrap";
+import {Button, Form, Spinner} from "react-bootstrap";
 import {UserDataProps} from "./UserProfileDataProp.ts";
 import {UserData} from "./UserProfileDataProp.ts";
 import React, {useState} from "react";
 
 const UserProfileDataForm = ({userData}: UserDataProps) => {
+
+    const [loading, setLoading] = useState<boolean>(false);
+
 
     const [formData, setFormData] = useState<UserData>({
         first_name: userData.first_name,
@@ -23,7 +26,11 @@ const UserProfileDataForm = ({userData}: UserDataProps) => {
     };
 
     const handleButtonClick = () => {
-        console.log("Form data:", formData);
+        setLoading(true)
+        setTimeout(() => {
+            console.log("Form data:", formData);
+            setLoading(false);
+        }, 2000);
     };
 
     return (
@@ -48,8 +55,12 @@ const UserProfileDataForm = ({userData}: UserDataProps) => {
                 <Form.Label className='h6'>Adresa</Form.Label>
                 <Form.Control type="text" name="address" value={formData.address} onChange={handleChange} />
             </Form.Group>
-
-            <Button type="button" onClick={handleButtonClick} className="user-profile-button my-3">Zmeniť údaje</Button>
+            {loading ? (
+                <Spinner animation="border" className="spinner my-3" />
+            ) : (
+                <Button type="button" onClick={handleButtonClick} className="user-profile-button my-3">
+                    Zmeniť údaje</Button>
+            )}
         </Form>
     );
 }

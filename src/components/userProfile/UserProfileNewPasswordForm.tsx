@@ -1,8 +1,11 @@
-import {Button, Form} from "react-bootstrap";
+import {Button, Form, Spinner} from "react-bootstrap";
 import React, {useState} from "react";
 import {ChangePasswordInterface} from "./ChangePasswordInterface.ts";
 
 const UserProfilePasswordForm = () => {
+
+    //control loading after submit
+    const [loading, setLoading] = useState<boolean>(false);
 
     const [passwords, setPasswords] = useState<ChangePasswordInterface>({
         old_password: "",
@@ -20,7 +23,11 @@ const UserProfilePasswordForm = () => {
     };
 
     const handleButtonClick = () => {
-        console.log("Passwords:", passwords);
+        setLoading(true)
+        setTimeout(() => {
+            console.log("Passwords:", passwords);
+            setLoading(false);
+        }, 2000);
     };
 
     return (
@@ -40,9 +47,13 @@ const UserProfilePasswordForm = () => {
                 <Form.Control type="password" name="new_password_confirm" value={passwords.new_password_confirm}
                               onChange={handleChange} />
             </Form.Group>
+            {loading ? (
+                <Spinner animation="border" className="spinner my-3" />
+            ) : (
+                <Button type="button" onClick={handleButtonClick} className="user-profile-button my-3">
+                    Zmeniť heslo</Button>
+            )}
 
-
-            <Button type="button" onClick={handleButtonClick} className="user-profile-button my-3">Zmeniť heslo</Button>
         </Form>
     );
 }
