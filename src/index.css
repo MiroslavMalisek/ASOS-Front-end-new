@@ -9,6 +9,7 @@
   --add-to-cart-background-color-hover: #388e3c;
   --product-price-font-color: #ff5959;
   --out-stock-font-color: #63686e;
+  --error-message-font-color: #c13131;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);

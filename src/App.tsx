@@ -10,12 +10,14 @@ import {UserProfile} from "./pages/UserProfile.tsx";
 import {UserOrders} from "./pages/UserOrders.tsx";
 import { Register } from './pages/Register.tsx';
 import {Product} from "./pages/Product.tsx";
+import {AuthProvider} from "./contexts/authentication/AuthContext.tsx";
 
 function App() {
 
   return (
       <>
-          <HelmetProvider>
+          <AuthProvider>
+              <HelmetProvider>
                   <MainLayout>
                       <Routes>
                           <Route path="/" element={<Home />} />
@@ -29,7 +31,8 @@ function App() {
                           <Route path="/orders" element={<UserOrders />} />
                       </Routes>
                   </MainLayout>
-          </HelmetProvider>
+              </HelmetProvider>
+          </AuthProvider>
       </>
 
   )

@@ -3,6 +3,10 @@ export interface RegisterFormDataInterface {
     last_name: string;
     email: string;
     phone: string;
-    address: string;
+    street: string;
+    house_number: string;
+    city: string;
+    zip_code: string;
+    country: string;
     password: string;
 }
