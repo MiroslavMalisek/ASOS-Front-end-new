@@ -2,13 +2,14 @@ import { Container, Nav, Navbar as Nb, NavDropdown } from "react-bootstrap";
 import {Link, NavLink, useNavigate} from "react-router-dom";
 import "./Navbar.css";
 import shopLogo from "../../assets/logo.jpg";
-//import cartImage from "../../assets/cart.png"
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import loginIcon from "../../assets/login.png";
 import logoutIcon from "../../assets/logout.png";
 import userIcon from "../../assets/user.png";
 import SearchBar from "./SearchBar.tsx";
 import { useState } from "react";
 import {useAuth} from "../../contexts/authentication/AuthContext.tsx";
+import {Badge} from "@mui/material";
 //import {useNavigate} from 'react-router-dom';
 
 const Navbar = () => {
@@ -64,59 +65,69 @@ const Navbar = () => {
             </Nav.Link>
           </Nav>
           <SearchBar onSearch={handleSearch} />
-          {isLoggedIn ? (
-            <NavDropdown
-              title={
-                <>
-                  <img src={userIcon} alt="Logout" className="log-icon me-2" />
-                  <span className="log-text">{user?.first_name} {user?.last_name}</span>
-                </>
-              }
-              id="nav-dropdown"
-              className="ms-auto drop-down"
-            >
-              <NavDropdown.Item
-                as={Link}
-                to="/orders"
-                onClick={handleNavLinkClick}
+
+          <div className="cart-user-section-in-navbar">
+            <div className="cart-badge">
+              <Link to="/cart" onClick={handleNavLinkClick}>
+                <Badge badgeContent={4} color="error">
+                  <ShoppingCartIcon className="cart-icon" />
+                </Badge>
+              </Link>
+            </div>
+            {isLoggedIn ? (
+              <NavDropdown
+                title={
+                  <>
+                    <img src={userIcon} alt="Logout" className="log-icon me-2" />
+                    <span className="log-text">{user?.first_name} {user?.last_name}</span>
+                  </>
+                }
+                id="nav-dropdown"
+                className="drop-down"
               >
-                Objednávky
-              </NavDropdown.Item>
-              <NavDropdown.Item
+                <NavDropdown.Item
+                  as={Link}
+                  to="/orders"
+                  onClick={handleNavLinkClick}
+                >
+                  Objednávky
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to="/profile"
+                  onClick={handleNavLinkClick}
+                >
+                  Môj profil
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item
+                  onClick={handleLogout}
+                  className="log-component ms-auto"
+                >
+                  <img
+                    alt="logout"
+                    src={logoutIcon}
+                    className="log-icon d-inline-block align-top"
+                  />
+                  <span className="log-text">Odhlásiť sa</span>
+                </NavDropdown.Item>
+              </NavDropdown>
+            ) : (
+              <Nb.Brand
+                className="nav-link log-component ms-auto"
                 as={Link}
-                to="/profile"
+                to="/login"
                 onClick={handleNavLinkClick}
-              >
-                Môj profil
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item
-                onClick={handleLogout}
-                className="log-component ms-auto"
               >
                 <img
-                  alt="logout"
-                  src={logoutIcon}
+                  alt="login"
+                  src={loginIcon}
                   className="log-icon d-inline-block align-top"
                 />
-                <span className="log-text">Odhlásiť sa</span>
-              </NavDropdown.Item>
-            </NavDropdown>
-          ) : (
-            <Nb.Brand
-              className="nav-link log-component ms-auto"
-              as={Link}
-              to="/login"
-              onClick={handleNavLinkClick}
-            >
-              <img
-                alt="login"
-                src={loginIcon}
-                className="log-icon d-inline-block align-top"
-              />
-              <span className="log-text">Prihlásiť sa</span>
-            </Nb.Brand>
-          )}
+                <span className="log-text">Prihlásiť sa</span>
+              </Nb.Brand>
+            )}
+          </div>
         </Nb.Collapse>
       </Container>
     </Nb>

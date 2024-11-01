@@ -5,6 +5,7 @@
 
 .navbar-collapse{
     background: white;
+    justify-content: space-between;
 }
 
 #navbar-logo {
@@ -40,10 +41,20 @@
     font-size: 1rem;
 }
 
+.drop-down{
+    padding: 1rem;
+}
+
+.drop-down:hover{
+    background-color: #f9f9f9;
+}
+
 .drop-down .dropdown-menu {
     margin-top: 1rem;
     margin-left: 0.5rem
 }
+
+
 
 @media (max-width: 768px) {
     /* Remove full width and background when navbar is expanded */
@@ -60,6 +71,16 @@
         width: 100%;
         margin: 0.2rem 0.2rem 0 0 !important;
     }
+
+    #nav-dropdown{
+        justify-content: center;
+    }
+
+    .drop-down{
+        width: 70%;
+    }
+
+
     .drop-down .dropdown-menu {
         margin: 0;
         width: 100% !important;
@@ -119,4 +140,42 @@
 
 .navbar-menu li a:hover {
     color: #007bff;
+}
+
+.search-button:hover{
+    background-color: var(--product-font-color);
+    border-color: var(--product-font-color);
+}
+
+.cart-icon{
+    color: var(--product-font-color);
+}
+
+.cart-icon:hover{
+    color: #007cb9;
+}
+
+.cart-badge{
+    margin-right: 4rem;
+}
+
+.cart-user-section-in-navbar{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+}
+
+@media (min-width: 768px) {
+    .cart-user-section-in-navbar{
+        flex-direction: row;
+        gap: 2rem;
+        margin: 0;
+    }
+    .cart-badge{
+        margin-right: 1rem;
+    }
+
 }

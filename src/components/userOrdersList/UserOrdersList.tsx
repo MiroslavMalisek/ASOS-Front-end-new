@@ -3,7 +3,7 @@ import {UserOrdersListProp} from "./UserOrdersListProp.ts";
 import {Link} from "react-router-dom";
 import {ListGroup} from "react-bootstrap";
 
-const UserOrdersAccordion = ({ orders } : UserOrdersListProp) => {
+const UserOrdersList = ({ orders } : UserOrdersListProp) => {
     return (
         <>
             {orders.map((order, index) => (
@@ -20,28 +20,28 @@ const UserOrdersAccordion = ({ orders } : UserOrdersListProp) => {
                         <div className="orders-list-item-products-images col-lg-6">
                             <Link to={`/product/${order.product_id}`}>
                                 <img
-                                    src={`/public/${order.product_image}`}
+                                    src={`${order.product_image}`}
                                     alt="product-image"
                                     className="orders-list-image"
                                 />
                             </Link>
                             <Link to={`/product/${order.product_id}`}>
                                 <img
-                                    src={`/public/${order.product_image}`}
+                                    src={`${order.product_image}`}
                                     alt="product-image"
                                     className="orders-list-image"
                                 />
                             </Link>
                             <Link to={`/product/${order.product_id}`}>
                                 <img
-                                    src={`/public/${order.product_image}`}
+                                    src={`${order.product_image}`}
                                     alt="product-image"
                                     className="orders-list-image"
                                 />
                             </Link>
                             <Link to={`/product/${order.product_id}`}>
                                 <img
-                                    src={`/public/${order.product_image}`}
+                                    src={`${order.product_image}`}
                                     alt="product-image"
                                     className="orders-list-image"
                                 />
@@ -58,4 +58,4 @@ const UserOrdersAccordion = ({ orders } : UserOrdersListProp) => {
     );
 };
 
-export default UserOrdersAccordion;
+export default UserOrdersList;
