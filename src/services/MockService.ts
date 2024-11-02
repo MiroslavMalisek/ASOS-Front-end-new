@@ -28,6 +28,7 @@ const categories: CategoryDTO[] = [
     {id: 2, name: "Počítače"},
     {id: 3, name: "Práčky"},
     {id: 4, name: "Iné"},
+    {id: 5, name: "Hračky"}
 ]
 
 const loginResponse: LoginResponseDTO = {

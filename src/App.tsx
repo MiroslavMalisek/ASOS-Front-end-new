@@ -16,6 +16,7 @@ import { PrimeReactProvider } from 'primereact/api';
 
 import 'primereact/resources/primereact.css';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import {ProductsByCategory} from "./pages/ProductsByCategory.tsx";
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
                       <MainLayout>
                           <Routes>
                               <Route path="/" element={<Home />} />
+                              <Route path="/:categoryName" element={<ProductsByCategory />} />
                               <Route path="/product/:id" element={<Product />} />
                               <Route path="/about-us" element={<AboutUs />} />
                               <Route path="/contact" element={<Contact />} />

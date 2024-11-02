@@ -1,5 +1,5 @@
-import {ProductInListDTO} from "../../services/productDTOs/ProductInListDTO.ts";
+import {ProductDTO} from "../../services/productDTOs/ProductDTO.ts";
 
 export interface ProductItemInProductListProps {
-    product: ProductInListDTO;
+    product: ProductDTO;
 }

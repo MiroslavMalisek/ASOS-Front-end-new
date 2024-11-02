@@ -4,9 +4,9 @@ import {CategoryDTO} from "../../services/productDTOs/CategoriesDTO.ts";
 import {ServiceSelector} from "../../services/ServiceSelector.ts";
 import {Alert} from "@mui/material";
 import {Spinner} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
-const SideBar = ({ onSelectCategory }: { onSelectCategory: (categoryId: number | null, categoryName: string | null)
-        => void }) => {
+const SideBar = () => {
 
     const [categories, setCategories] = useState<CategoryDTO[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -47,12 +47,13 @@ const SideBar = ({ onSelectCategory }: { onSelectCategory: (categoryId: number |
                 categories.map(category => (
                     <div
                         key={category.id}
-                        className="category-item p-2"
-                        onClick={() => onSelectCategory(category.id, category.name)}>
-                        <a className="my-link">{category.name}</a>
+                        className="category-item p-2">
+                        <Link className="my-link" to={`/${category.name}`}>
+                            <a>{category.name}</a>
+                        </Link>
                     </div>
                 ))
-            )},
+            )}
         </div>
     );
 };

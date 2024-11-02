@@ -52,7 +52,8 @@ const ProductView = ({ productId } : {productId: string}) => {
                         <Breadcrumb.Item linkAs={Link} linkProps={{to: "/"}}>
                             <img src={homeIcon} alt="Domov" className="breadcrumb-home-icon"/>
                         </Breadcrumb.Item>
-                        <Breadcrumb.Item className="breadcrumb-item" linkAs={Link} linkProps={{to: "/contact" }}>
+                        <Breadcrumb.Item className="breadcrumb-item" linkAs={Link}
+                                         linkProps={{to: `/${product?.category_name}`}}>
                             {product?.category_name}
                         </Breadcrumb.Item>
                         <Breadcrumb.Item className="breadcrumb-item" active>
