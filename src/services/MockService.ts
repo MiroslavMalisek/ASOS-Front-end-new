@@ -4,6 +4,10 @@ import {LoginDTO} from "./userDTOs/LoginDTO.ts";
 import {LoginResponseDTO} from "./userDTOs/LoginResponseDTO.ts";
 import {RegisterDTO} from "./userDTOs/RegisterDTO.ts";
 import {CategoryDTO} from "./productDTOs/CategoriesDTO.ts";
+import {PasswordChangeDTO} from "./userDTOs/PasswordChangeDTO.ts";
+import {UserDataDTO} from "./userDTOs/UserDataDTO.ts";
+import {OrderDTO} from "./orderDTOs/OrderDTO.ts";
+import {PlaceOrderDTO} from "./orderDTOs/PlaceOrderDTO.ts";
 
 const products: ProductDTO[] = [
     {id: 1, img_path: "iphone.webp", name: "Iphone", category_id: 1, category_name: "Mobily", short_description: "Toto je Iphone short popis",
@@ -35,6 +39,9 @@ const loginResponse: LoginResponseDTO = {
     session_token: "0123456789", user_id: 2, first_name: "Miro", last_name: "Nejaký",
 }
 
+const userData: UserDataDTO = {first_name: "Miroslav", last_name: "Malíšek", street: "Kvetná", house_number: "9B",
+    zip_code: "89204", city: "Bratislava", country: "Slovensko", phone: "+421915076851"};
+
 export const MockService: IApiService = {
 
     async getProducts(): Promise<ProductDTO[]> {
@@ -62,7 +69,7 @@ export const MockService: IApiService = {
         });
     },
 
-    getCategories(): Promise<CategoryDTO[]> {
+    async getCategories(): Promise<CategoryDTO[]> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 if(categories){
@@ -74,7 +81,7 @@ export const MockService: IApiService = {
         });
     },
 
-    getProductsByCategory(category_id: number): Promise<ProductDTO[]> {
+    async getProductsByCategory(category_id: number): Promise<ProductDTO[]> {
         return new Promise((resolve) => {
             setTimeout(() => {
                 const productsInCategory = products.filter(item => item.category_id === category_id);
@@ -83,7 +90,7 @@ export const MockService: IApiService = {
         });
     },
 
-    login(loginData: LoginDTO): Promise<LoginResponseDTO> {
+    async login(loginData: LoginDTO): Promise<LoginResponseDTO> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 if (loginData.email === "mirec300@gmail.com" && loginData.password === "password") {
@@ -95,7 +102,7 @@ export const MockService: IApiService = {
         });
     },
 
-    register(registerData: RegisterDTO): Promise<void> {
+    async register(registerData: RegisterDTO): Promise<void> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 if (registerData.email !== "mirec300@gmail.com") {
@@ -107,7 +114,7 @@ export const MockService: IApiService = {
         });
     },
 
-    logout(): Promise<void> {
+    async logout(): Promise<void> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 const success = true;
@@ -120,5 +127,54 @@ export const MockService: IApiService = {
         });
     },
 
+    async changePassword(passwordData: PasswordChangeDTO): Promise<void> {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (passwordData.old_password !== "password") {
+                    reject(new Error("Staré heslo je nesprávne"));
+                } else if (passwordData.new_password !== passwordData.new_password_confirm){
+                    reject(new Error("Heslá sa nezhodujú"));
+                } else {
+                    resolve();
+                }
+            }, 500);
+        });
+    },
+
+    async getUserData(): Promise<UserDataDTO> {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (userData){
+                    resolve(userData);
+                } else {
+                    reject(new Error("Dáta sa nepodarilo získať"));
+                }
+            }, 500);
+        });
+    },
+
+    async changeUserData(userData: UserDataDTO): Promise<UserDataDTO> {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (userData.first_name === "Peter") {
+                    resolve(userData);
+                } else {
+                    reject(new Error("Meno sa nezhoduje s predpokladom."));
+                }
+            }, 500);
+        });
+    },
+
+    getOrders(): Promise<OrderDTO[]> {
+        return Promise.resolve([]);
+    },
+
+    getProductsBySearchString(searchString: string): Promise<ProductDTO[]> {
+        return Promise.resolve([]);
+    },
+
+    placeOrder(order: PlaceOrderDTO): Promise<void> {
+        return Promise.resolve(undefined);
+    },
 
 }

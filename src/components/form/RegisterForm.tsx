@@ -42,7 +42,7 @@ export function RegisterForm() {
         setError(null)
 
         try {
-            const response: void = await apiService.register(formData)
+            await apiService.register(formData)
             setRegisterSuccess(true);
             setShowRegisterSuccessMessage(true);
         } catch (error) {
