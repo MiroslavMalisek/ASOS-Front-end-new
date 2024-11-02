@@ -66,6 +66,12 @@
 
 .product-footer{
     background-color: white;
-    color: var(--in-stock-font-color);
     font-weight: 500;
+}
+.product-footer.in-stock{
+    color: var(--in-stock-font-color);
+}
+
+.product-footer.out-stock{
+    color: var(--out-stock-font-color);
 }

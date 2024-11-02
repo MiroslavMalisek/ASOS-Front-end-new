@@ -18,9 +18,14 @@ const Navbar = () => {
 
   const [isCollapsed, setIsCollapsed] = useState(true);
 
-  const handleLogout = () => {
-    logout()
-    navigate('/');
+  const handleLogout= async (e: any) => {
+    e.preventDefault();
+    try {
+      await logout();
+      navigate('/');
+    }catch (error) {
+      console.error("Logout failed:", (error as Error).message || "Failed to logout");
+    }
   }
 
   const handleNavLinkClick = () => {

@@ -1,52 +1,59 @@
 import React, {createContext, useContext, useState} from "react";
 import {UserSessionData, AuthContextType} from "./AuthTypes.ts";
 import {LoginFormDataInterface} from "../../components/form/LoginFormDataInterface.ts";
+import {ServiceSelector} from "../../services/ServiceSelector.ts";
+import {LoginDTO} from "../../services/userDTOs/LoginDTO.ts";
+import {LoginResponseDTO} from "../../services/userDTOs/LoginResponseDTO.ts";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+
+    const apiService = ServiceSelector;
 
     const [user, setUser] = useState<UserSessionData | null>(() => {
         // Get the initial user data from localStorage if it exists
         const storedUser = localStorage.getItem('user');
         return storedUser ? JSON.parse(storedUser) : null;
     });
-    const [sessionToken, setSessionToken] = useState<string | null>(localStorage.getItem('sessionToken'));
+    const [, setSessionToken] = useState<string | null>(localStorage.getItem('sessionToken'));
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(localStorage.getItem('isLoggedIn') === 'true');
 
-    const login = async ({ email, password }: LoginFormDataInterface) => {
+    const login = async ({ email, password }: LoginFormDataInterface): Promise<void> => {
+        const loginData: LoginDTO = {email: email, password: password};
+        try {
+            const response: LoginResponseDTO = await apiService.login(loginData);
 
-        return new Promise<void>((resolve, reject) => {
-            setTimeout(() => {
-                if (email === "mirec300@gmail.com" && password === "password") {
-                    const sessionToken = "0123456789";
-                    const sessionData: UserSessionData = {
-                        id: "1",
-                        first_name: "Miro",
-                        last_name: "Malíšek"
-                    };
-                    localStorage.setItem('sessionToken', sessionToken);
-                    setSessionToken(sessionToken);
-                    localStorage.setItem('user', JSON.stringify(sessionData));
-                    setUser(sessionData);
-                    localStorage.setItem('isLoggedIn', 'true');
-                    setIsLoggedIn(true);
-                    resolve(); // Resolve the promise if login is successful
-                } else {
-                    reject(new Error("Nesprávny email alebo heslo")); // Reject the promise on error
-                }
-            }, 2000);
-        });
+            localStorage.setItem('sessionToken', response.session_token);
+            setSessionToken(response.session_token);
+
+            const userResponse: UserSessionData = {
+                id: response.user_id,
+                first_name: response.first_name,
+                last_name: response.last_name,
+            }
+            localStorage.setItem('user', JSON.stringify(userResponse));
+            setUser(userResponse);
+            localStorage.setItem('isLoggedIn', 'true');
+            setIsLoggedIn(true);
+        } catch (error) {
+            throw error;
+        }
 
     };
 
-    const logout = () => {
-        localStorage.removeItem('sessionToken');
-        setSessionToken(null);
-        localStorage.removeItem('user');
-        setUser(null);
-        localStorage.removeItem('isLoggedIn');
-        setIsLoggedIn(false);
+    const logout = async () => {
+        try {
+            await apiService.logout();
+            localStorage.removeItem('sessionToken');
+            setSessionToken(null);
+            localStorage.removeItem('user');
+            setUser(null);
+            localStorage.removeItem('isLoggedIn');
+            setIsLoggedIn(false);
+        }catch (error) {
+            throw error
+        }
     };
 
     return (

@@ -5,20 +5,24 @@ import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
 import "./Form.css"
 import React, {useEffect, useState} from "react";
-import {RegisterFormDataInterface} from "./RegisterFormDataInterface.ts";
+import {RegisterDTO} from "../../services/userDTOs/RegisterDTO.ts";
 import {Spinner} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import {Alert} from "@mui/material";
+import {ServiceSelector} from "../../services/ServiceSelector.ts";
 
 
 export function RegisterForm() {
+
+    const apiService = ServiceSelector;
+
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<{ message: string } | null>(null);
     const [registerSuccess, setRegisterSuccess] = useState<boolean>(false);
     const [showRegisterSuccessMessage, setShowRegisterSuccessMessage] = useState<boolean>(false);
     const navigate = useNavigate();
 
-    const [formData, setFormData] = useState<RegisterFormDataInterface>({
+    const [formData, setFormData] = useState<RegisterDTO>({
         first_name: "",
         last_name: "",
         street: "",
@@ -31,21 +35,21 @@ export function RegisterForm() {
         password: "",
     });
 
-    const signUp = (e: any) => {
+    const signUp = async (e: any) => {
         e.preventDefault();
         setLoading(true)
         setRegisterSuccess(false);
         setError(null)
-        setTimeout(() => {
-            console.log("Data:", formData);
-            if(formData.first_name === "Miro"){
-                setRegisterSuccess(true);
-                setShowRegisterSuccessMessage(true);
-            }else {
-                setError({ message: "Nepodarila sa registrácia"})
-            }
-            setLoading(false);
-        }, 2000);
+
+        try {
+            const response: void = await apiService.register(formData)
+            setRegisterSuccess(true);
+            setShowRegisterSuccessMessage(true);
+        } catch (error) {
+            setError({ message: (error as Error).message || "Registrácia sa nepodarila. Skúste to znovu." });
+        }finally {
+            setLoading(false)
+        }
 
     }
 

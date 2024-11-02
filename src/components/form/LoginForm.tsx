@@ -31,7 +31,7 @@ export function LoginForm() {
             setLoginSuccess(true)
             setShowLoginSuccessMessage(true)
         }catch (error) {
-            setError({ message: (error as Error).message })
+            setError({ message: (error as Error).message || "Prihlásenie sa nepodarilo. Skúste to znovu." });
         }finally {
             setLoading(false)
 

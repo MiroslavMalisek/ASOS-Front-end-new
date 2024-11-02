@@ -1,7 +1,7 @@
 import {LoginFormDataInterface} from "../../components/form/LoginFormDataInterface.ts";
 
 export interface UserSessionData {
-    id: string;
+    id: number;
     first_name: string;
     last_name: string;
 }
