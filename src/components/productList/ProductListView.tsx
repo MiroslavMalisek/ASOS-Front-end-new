@@ -31,7 +31,13 @@ const ProductListView: React.FC<ProductListViewProps> = ({ isCategory, category,
                         <h3 id="name-category" className="mb-0">
                             {isCategory ? category?.name : "Všetky produkty"}
                         </h3>
-                        <p id="number-products" className="mb-0 mt-2 ms-2">({products.length} produktov)</p>
+                        <p id="number-products" className="mb-0 mt-2 ms-2">({products.length} { products.length === 1 ? (
+                            "Produkt"
+                        ) : (products.length === 2) || (products.length === 3) || (products.length == 4)  ? (
+                            "Produkty"
+                        ) : (
+                            "Produktov"
+                        )})</p>
                     </div>
                     <div className="items-list p-0">
                         {products.map(product => (
@@ -39,7 +45,7 @@ const ProductListView: React.FC<ProductListViewProps> = ({ isCategory, category,
                         ))}
                     </div>
                 </>
-            )},
+            )}
         </>
     )
 }

@@ -8,6 +8,8 @@ import {PasswordChangeDTO} from "./userDTOs/PasswordChangeDTO.ts";
 import {UserDataDTO} from "./userDTOs/UserDataDTO.ts";
 import {OrderDTO} from "./orderDTOs/OrderDTO.ts";
 import {PlaceOrderDTO} from "./orderDTOs/PlaceOrderDTO.ts";
+import {ProductInOrderDTO} from "./orderDTOs/ProductInOrderDTO.ts";
+import {ProductInPlaceOrderDTO} from "./orderDTOs/ProductInPlaceOrderDTO.ts";
 
 const products: ProductDTO[] = [
     {id: 1, img_path: "iphone.webp", name: "Iphone", category_id: 1, category_name: "Mobily", short_description: "Toto je Iphone short popis",
@@ -41,6 +43,75 @@ const loginResponse: LoginResponseDTO = {
 
 const userData: UserDataDTO = {first_name: "Miroslav", last_name: "Malíšek", street: "Kvetná", house_number: "9B",
     zip_code: "89204", city: "Bratislava", country: "Slovensko", phone: "+421915076851"};
+
+const productsInOrder0: ProductInOrderDTO[] = [
+    {id: 1, name: "IPhone", img_path: "iphone.webp"},
+    {id: 7, name: "Xiaomi kamera", img_path: "xiaomi_cam.webp"},
+    {id: 4, name: "LG práčka", img_path: "lg_pracka.webp"},
+    {id: 2, name: "Klávesnica", img_path: "klavesnica.webp"},
+    {id: 6, name: "Samsung mobil", img_path: "samsung_mobil.webp"},
+    {id: 7, name: "Xiaomi kamera", img_path: "xiaomi_cam.webp"},
+    {id: 7, name: "Xiaomi kamera", img_path: "xiaomi_cam.webp"},
+    {id: 7, name: "Xiaomi kamera", img_path: "xiaomi_cam.webp"},
+    {id: 7, name: "Xiaomi kamera", img_path: "xiaomi_cam.webp"},
+    {id: 7, name: "Xiaomi kamera", img_path: "xiaomi_cam.webp"},
+    {id: 7, name: "Xiaomi kamera", img_path: "xiaomi_cam.webp"},
+    {id: 7, name: "Xiaomi kamera", img_path: "xiaomi_cam.webp"},
+    {id: 2, name: "Klávesnica", img_path: "klavesnica.webp"},
+    {id: 2, name: "Klávesnica", img_path: "klavesnica.webp"},
+    {id: 2, name: "Klávesnica", img_path: "klavesnica.webp"},
+    {id: 2, name: "Klávesnica", img_path: "klavesnica.webp"},
+
+]
+
+const productsInOrder1: ProductInOrderDTO[] = [
+    {id: 4, name: "LG práčka", img_path: "lg_pracka.webp"},
+    {id: 2, name: "Klávesnica", img_path: "klavesnica.webp"},
+    {id: 6, name: "Samsung mobil", img_path: "samsung_mobil.webp"},
+    {id: 3, name: "Lenovo Notebook", img_path: "lenovo_pc.webp"},
+    {id: 7, name: "Xiaomi kamera", img_path: "xiaomi_cam.webp"},
+
+]
+
+const order0: OrderDTO = {
+    order_number: "1267",
+    order_date_created: "28-12-2024",
+    products: productsInOrder0,
+    total_price: 2456.56,
+}
+
+const order1: OrderDTO = {
+    order_number: "7828203",
+    order_date_created: "01-08-2015",
+    products: productsInOrder1,
+    total_price: 234.70,
+}
+
+const orders: OrderDTO[] = [
+    order0,
+    order1,
+]
+
+const productsInPlaceOrder0: ProductInPlaceOrderDTO[] = [
+    {id: 1, price: 1089.78, quantity: 1},
+    {id: 5, price: 1599.99, quantity: 1},
+]
+
+const productsInPlaceOrder1: ProductInPlaceOrderDTO[] = [
+    {id: 6, price: 350, quantity: 1},
+    {id: 7, price: 16, quantity: 5},
+    {id: 3, price: 1200, quantity: 1},
+]
+
+export const placeOrder0: PlaceOrderDTO = {
+    products_in_order: productsInPlaceOrder0,
+    total_price: 2689.77,
+}
+
+export const placeOrder1: PlaceOrderDTO = {
+    products_in_order: productsInPlaceOrder1,
+    total_price: 1630.0,
+}
 
 export const MockService: IApiService = {
 
@@ -166,7 +237,15 @@ export const MockService: IApiService = {
     },
 
     getOrders(): Promise<OrderDTO[]> {
-        return Promise.resolve([]);
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (orders){
+                    resolve(orders);
+                } else {
+                    reject(new Error("Objednávky sa nepodarilo získať"));
+                }
+            }, 500);
+        });
     },
 
     getProductsBySearchString(searchString: string): Promise<ProductDTO[]> {
@@ -174,7 +253,17 @@ export const MockService: IApiService = {
     },
 
     placeOrder(order: PlaceOrderDTO): Promise<void> {
-        return Promise.resolve(undefined);
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log(order.total_price)
+                console.log(placeOrder0.total_price)
+                if (order.total_price != placeOrder0.total_price) {
+                    reject(new Error("Celková cena nie je správna"));
+                } else {
+                    resolve()
+                }
+            }, 500);
+        });
     },
 
 }

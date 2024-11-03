@@ -67,7 +67,7 @@ const UserProfileDataForm = () => {
                 const userData = await apiService.getUserData();
                 setUserData(userData);
             } catch (error) {
-                setError({ message: (error as Error).message || "Zmena hesla sa nepodarila. Skúste to znovu." });
+                setError({ message: (error as Error).message || "Údaje sa nepodarilo získať. Skúste to znovu." });
             }finally {
                 setLoadingGetData(false);
             }

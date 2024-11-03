@@ -66,7 +66,7 @@ export function RegisterForm() {
         if (registerSuccess) {
             const timer = setTimeout(() => {
                 setShowRegisterSuccessMessage(false)
-                navigate('/login'); // Redirect to home page
+                navigate('/login'); // Redirect to login page
             }, 3000);
 
             return () => clearTimeout(timer);

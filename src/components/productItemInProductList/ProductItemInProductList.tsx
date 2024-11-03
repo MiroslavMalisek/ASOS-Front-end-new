@@ -8,10 +8,10 @@ import {ProductItemInProductListProps} from "./ProductItemInProductListProps.ts"
 const ProductItemInProductList = ({ product } : ProductItemInProductListProps) => {
     return (
         <Card className="product-item">
-            <Link to={`/product/${product.id}`}>
-                <Card.Img className="product-image mx-auto" variant="top" src={`/${product.img_path}`}/>
+            <Link to={`/product/${product.id}`} className="product-image-link">
+                <Card.Img className="product-image" variant="top" src={`/${product.img_path}`}/>
             </Link>
-            <Card.Body>
+            <Card.Body className="card-body">
                 <Link to={`/product/${product.id}`} className="product-name-link">
                     <Card.Title className="product-name">{product.name}</Card.Title>
                 </Link>
@@ -32,7 +32,7 @@ const ProductItemInProductList = ({ product } : ProductItemInProductListProps) =
             <img className="item-photo" src={iphonePhoto} alt="product image"/>
 
         </Card>*/
-    );
+    )
 };
 
 export default ProductItemInProductList;
