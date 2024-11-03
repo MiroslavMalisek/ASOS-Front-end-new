@@ -8,12 +8,14 @@ import {CategoryDTO} from "../../services/productDTOs/CategoriesDTO.ts";
 type ProductListViewProps = {
     isCategory: boolean;
     category: CategoryDTO | null;
+    isSearched: boolean;
+    searchQuery: string | null;
     products: ProductDTO[];
     loading: boolean;
     error: string | null;
 };
 
-const ProductListView: React.FC<ProductListViewProps> = ({ isCategory, category, products, loading, error }) => {
+const ProductListView: React.FC<ProductListViewProps> = ({ isCategory, category, isSearched, searchQuery, products, loading, error }) => {
     return (
         <>
             {error ? (
@@ -29,7 +31,13 @@ const ProductListView: React.FC<ProductListViewProps> = ({ isCategory, category,
                 <>
                     <div className="name-container mb-4 d-flex align-items-start">
                         <h3 id="name-category" className="mb-0">
-                            {isCategory ? category?.name : "Všetky produkty"}
+                            {isCategory ? (
+                                category?.name
+                            ) : isSearched ? (
+                                <>Hľadaný výraz: {searchQuery}</>
+                            ) : (
+                                "Všetky produkty"
+                            )}
                         </h3>
                         <p id="number-products" className="mb-0 mt-2 ms-2">({products.length} { products.length === 1 ? (
                             "Produkt"

@@ -47,7 +47,8 @@ const ProductListByCategory = ({ categoryName } : {categoryName: string}) => {
 
     return (
         <>
-            <ProductListView isCategory={true} category={category} products={products} loading={loading} error={error} />
+            <ProductListView isCategory={true} category={category} isSearched={false} searchQuery={null}
+                             products={products} loading={loading} error={error} />
         </>
     );
 

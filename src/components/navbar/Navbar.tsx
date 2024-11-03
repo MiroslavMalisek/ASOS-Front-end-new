@@ -33,11 +33,8 @@ const Navbar = () => {
   };
 
   const handleSearch = (query: string) => {
-    // You can perform the search logic here
-    console.log("Searching for:", query);
     handleNavLinkClick();
-    // For example, you can navigate to a search results page
-    //navigate(`/about-us`);
+    navigate(`/?search=${encodeURIComponent(query)}`);
   };
 
   return (

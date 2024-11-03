@@ -140,6 +140,17 @@ export const MockService: IApiService = {
         });
     },
 
+    getProductsBySearchString(searchString: string): Promise<ProductDTO[]> {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                const filteredProducts = products.filter(product =>
+                    product.name.toLowerCase().includes(searchString.toLowerCase())
+                );
+                resolve(filteredProducts);
+            }, 500);
+        });
+    },
+
     async getCategories(): Promise<CategoryDTO[]> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -155,7 +166,7 @@ export const MockService: IApiService = {
     async getProductsByCategory(category_id: number): Promise<ProductDTO[]> {
         return new Promise((resolve) => {
             setTimeout(() => {
-                const productsInCategory = products.filter(item => item.category_id === category_id);
+                const productsInCategory = products.filter(product => product.category_id === category_id);
                 resolve(productsInCategory);
             }, 500);
         });
@@ -246,10 +257,6 @@ export const MockService: IApiService = {
                 }
             }, 500);
         });
-    },
-
-    getProductsBySearchString(searchString: string): Promise<ProductDTO[]> {
-        return Promise.resolve([]);
     },
 
     placeOrder(order: PlaceOrderDTO): Promise<void> {
