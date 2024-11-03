@@ -104,11 +104,13 @@ const productsInPlaceOrder1: ProductInPlaceOrderDTO[] = [
 ]
 
 export const placeOrder0: PlaceOrderDTO = {
+    customer: userData,
     products_in_order: productsInPlaceOrder0,
     total_price: 2689.77,
 }
 
 export const placeOrder1: PlaceOrderDTO = {
+    customer: userData,
     products_in_order: productsInPlaceOrder1,
     total_price: 1630.0,
 }
@@ -262,8 +264,6 @@ export const MockService: IApiService = {
     placeOrder(order: PlaceOrderDTO): Promise<void> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                console.log(order.total_price)
-                console.log(placeOrder0.total_price)
                 if (order.total_price != placeOrder0.total_price) {
                     reject(new Error("Celková cena nie je správna"));
                 } else {

@@ -11,11 +11,13 @@ import {ServiceSelector} from "../../services/ServiceSelector.ts";
 import {Spinner} from "react-bootstrap";
 import {Alert} from "@mui/material";
 import {useNavigate} from "react-router-dom";
+import {UserDataDTO} from "../../services/userDTOs/UserDataDTO.ts";
 
 export default function CartProcessing() {
     const stepperRef = useRef(null);
 
     const [loading, setLoading] = useState<boolean>(false);
+    const [loadingGetData, setLoadingGetData] = useState<boolean>(false);
     const [error, setError] = useState<{ message: string } | null>(null);
     const [placeOrderSuccess, setPlaceOrderSuccess] = useState<boolean>(false);
     const [showPlaceOrderSuccessMessage, setShowPlaceOrderSuccessMessage] = useState<boolean>(false);
@@ -25,6 +27,16 @@ export default function CartProcessing() {
             ...placeOrder0,
     }
     );
+    const [userData, setUserData] = useState<UserDataDTO>({
+        first_name: "",
+        last_name: "",
+        street: "",
+        house_number: "",
+        zip_code: "",
+        city: "",
+        country: "",
+        phone: "",
+    });
 
     const navigate = useNavigate();
     const apiService = ServiceSelector;
@@ -63,9 +75,24 @@ export default function CartProcessing() {
         }
     }, [placeOrderSuccess]);
 
+    useEffect(() => {
+        const fetchUserData = async () => {
+            setLoadingGetData(true);
+            try {
+                const userData = await apiService.getUserData();
+                setUserData(userData);
+            } catch (error) {
+                setError({ message: (error as Error).message || "Údaje sa nepodarilo získať. Skúste to znovu." });
+            }finally {
+                setLoadingGetData(false);
+            }
+        };
+        fetchUserData();
+    }, []);
+
     return (
         <>
-            {loading ? (
+            {loading || loadingGetData ? (
                 <Spinner animation="border" className="spinner my-3" />
             ) : (showPlaceOrderSuccessMessage) ? (
                     <Alert severity="success">Objednávka bola úspešne odoslaná</Alert>
