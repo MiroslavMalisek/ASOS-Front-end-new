@@ -29,7 +29,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)} // Update state on input change
             />
-            <Button variant="secondary" onClick={handleSearch}>Hľadať</Button>
+            <Button variant="secondary" className="search-button" onClick={handleSearch}>Hľadať</Button>
         </Form>
     );
 };

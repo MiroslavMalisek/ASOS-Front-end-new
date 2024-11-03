@@ -58,9 +58,16 @@
 }
 
 .product-view-stock {
-    color: var(--in-stock-font-color);
     font-weight: 500;
     align-content: center;
+}
+
+.product-view-stock.in-stock{
+    color: var(--in-stock-font-color);
+}
+
+.product-view-price.out-stock{
+    color: var(--out-stock-font-color);
 }
 
 .product-view-price {

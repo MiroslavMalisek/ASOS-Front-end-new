@@ -1,17 +1,31 @@
 import {Button, Form, Spinner} from "react-bootstrap";
-import React, {useState} from "react";
-import {ChangePasswordInterface} from "./ChangePasswordInterface.ts";
+import React, {useEffect, useState} from "react";
+import {ServiceSelector} from "../../services/ServiceSelector.ts";
+import {PasswordChangeDTO} from "../../services/userDTOs/PasswordChangeDTO.ts";
+import {Alert} from "@mui/material";
 
 const UserProfilePasswordForm = () => {
 
-    //control loading after submit
     const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<{ message: string } | null>(null);
+    const [passwordChangeSuccess, setPasswordChangeSuccess] = useState<boolean>(false);
+    const [showPasswordChangeSuccessMessage, setShowPasswordChangeSuccessMessage] = useState<boolean>(false);
 
-    const [passwords, setPasswords] = useState<ChangePasswordInterface>({
+    const [passwords, setPasswords] = useState<PasswordChangeDTO>({
         old_password: "",
         new_password: "",
         new_password_confirm: "",
     });
+
+    const apiService = ServiceSelector;
+
+    const clearPasswordsForm = () => {
+        setPasswords({
+            old_password: "",
+            new_password: "",
+            new_password_confirm: "",
+        });
+    };
 
     // Handle input change and update state
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,13 +36,42 @@ const UserProfilePasswordForm = () => {
         });
     };
 
-    const handleButtonClick = () => {
-        setLoading(true)
-        setTimeout(() => {
-            console.log("Passwords:", passwords);
-            setLoading(false);
-        }, 2000);
+    const checkPasswordsCorrectness = () => {
+        if (passwords.new_password !== passwords.new_password_confirm) {
+            setError({message: "Heslá sa nezhodujú."})
+            return false;
+        }
+        return true;
+    }
+
+    const handleButtonClick = async () => {
+        setError(null)
+        if (checkPasswordsCorrectness()) {
+            setLoading(true)
+            try {
+                await apiService.changePassword(passwords)
+                setPasswordChangeSuccess(true)
+                setShowPasswordChangeSuccessMessage(true)
+            }catch (error) {
+                setError({ message: (error as Error).message || "Zmena hesla sa nepodarila. Skúste to znovu." });
+            }finally {
+                setLoading(false)
+                clearPasswordsForm()
+            }
+        }
     };
+
+    useEffect(() => {
+        // After successful pasword change, display the message and dissmiss it after 5 seconds
+        if (passwordChangeSuccess) {
+            const timer = setTimeout(() => {
+                setPasswordChangeSuccess(false);
+                setShowPasswordChangeSuccessMessage(false)
+            }, 5000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [passwordChangeSuccess]);
 
     return (
         <Form>
@@ -47,6 +90,21 @@ const UserProfilePasswordForm = () => {
                 <Form.Control type="password" name="new_password_confirm" value={passwords.new_password_confirm}
                               onChange={handleChange} />
             </Form.Group>
+
+            {error &&
+                <div className="error-message-div mb-3 mt-4">
+                    <Alert variant="filled" severity="error" className="error-message ">
+                        {error.message}
+                    </Alert>
+                </div>
+            }
+
+            {showPasswordChangeSuccessMessage &&
+                <div className="success-message">
+                    <Alert severity="success">Heslo bolo úspešne zmenené.</Alert>
+                </div>
+            }
+
             {loading ? (
                 <Spinner animation="border" className="spinner my-3" />
             ) : (

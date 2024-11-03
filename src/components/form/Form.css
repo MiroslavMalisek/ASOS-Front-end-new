@@ -16,3 +16,19 @@
 .spinner{
     color: var(--product-font-color);
 }
+
+.success-message{
+    display: flex;
+    justify-content: center;
+}
+
+.error-message-div{
+    display: flex;
+    justify-content: center;
+}
+
+.error-message{
+    display: flex;
+    justify-content: center;
+    width: 75%;
+}
