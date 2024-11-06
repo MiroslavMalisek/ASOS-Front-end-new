@@ -179,3 +179,11 @@
     }
 
 }
+
+.cart-icon-container:hover .cart-icon {
+    color: white; /* Change to your desired hover color */
+  }
+  
+  .cart-icon {
+    color: black; /* Default color */
+  }

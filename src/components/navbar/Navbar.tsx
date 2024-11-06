@@ -1,32 +1,43 @@
-import { Container, Nav, Navbar as Nb, NavDropdown } from "react-bootstrap";
-import {Link, NavLink, useNavigate} from "react-router-dom";
+import {
+  Container,
+  Nav,
+  Navbar as Nb,
+  NavDropdown,
+  Button,
+} from "react-bootstrap";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import shopLogo from "../../assets/logo.jpg";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import loginIcon from "../../assets/login.png";
 import logoutIcon from "../../assets/logout.png";
 import userIcon from "../../assets/user.png";
 import SearchBar from "./SearchBar.tsx";
 import { useState } from "react";
-import {useAuth} from "../../contexts/authentication/AuthContext.tsx";
-import {Badge} from "@mui/material";
+import { useAuth } from "../../contexts/authentication/AuthContext.tsx";
+import { Badge } from "@mui/material";
+import { UseShoppingCart } from "../../contexts/shoppingCart/ShoppingCartContext.tsx";
 //import {useNavigate} from 'react-router-dom';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { user, isLoggedIn, logout } = useAuth();
+  const { openCart, cartQuantity } = UseShoppingCart();
 
   const [isCollapsed, setIsCollapsed] = useState(true);
 
-  const handleLogout= async (e: any) => {
+  const handleLogout = async (e: any) => {
     e.preventDefault();
     try {
       await logout();
-      navigate('/');
-    }catch (error) {
-      console.error("Logout failed:", (error as Error).message || "Failed to logout");
+      navigate("/");
+    } catch (error) {
+      console.error(
+        "Logout failed:",
+        (error as Error).message || "Failed to logout"
+      );
     }
-  }
+  };
 
   const handleNavLinkClick = () => {
     setIsCollapsed(true);
@@ -70,18 +81,47 @@ const Navbar = () => {
 
           <div className="cart-user-section-in-navbar">
             <div className="cart-badge">
+              {cartQuantity > 0 && (
+                <Button
+                  style={{
+                    width: "3rem",
+                    height: "3rem",
+                    position: "relative",
+                  }}
+                  variant="outline-dark"
+                  className="rounded-circle cart-icon-container"
+                  onClick={openCart}
+                >
+                  <Badge
+                    badgeContent={cartQuantity.toPrecision()}
+                    color="error"
+                  >
+                    <ShoppingCartIcon className="cart-icon" />
+                  </Badge>
+                </Button>
+              )}
+            </div>
+            {/*
+            <div className="cart-badge">
               <Link to="/cart" onClick={handleNavLinkClick}>
                 <Badge badgeContent={4} color="error">
                   <ShoppingCartIcon className="cart-icon" />
                 </Badge>
               </Link>
             </div>
+            */}
             {isLoggedIn ? (
               <NavDropdown
                 title={
                   <>
-                    <img src={userIcon} alt="Logout" className="log-icon me-2" />
-                    <span className="log-text">{user?.first_name} {user?.last_name}</span>
+                    <img
+                      src={userIcon}
+                      alt="Logout"
+                      className="log-icon me-2"
+                    />
+                    <span className="log-text">
+                      {user?.first_name} {user?.last_name}
+                    </span>
                   </>
                 }
                 id="nav-dropdown"
