@@ -7,6 +7,7 @@ import {PasswordChangeDTO} from "./userDTOs/PasswordChangeDTO.ts";
 import {UserDataDTO} from "./userDTOs/UserDataDTO.ts";
 import {PlaceOrderDTO} from "./orderDTOs/PlaceOrderDTO.ts";
 import {OrderDTO} from "./orderDTOs/OrderDTO.ts";
+import { UserCartDataDTO } from "./userDTOs/UserCartDataDTO.ts";
 
 export interface IApiService {
     getProducts(): Promise<ProductDTO[]>;
@@ -18,6 +19,7 @@ export interface IApiService {
     register(registerData: RegisterDTO): Promise<void>;
     changePassword(passwordData: PasswordChangeDTO): Promise<void>;
     getUserData(): Promise<UserDataDTO>;
+    getUserCartData(): Promise<UserCartDataDTO>;
     changeUserData(userData: UserDataDTO): Promise<UserDataDTO>;
     logout(): Promise<void>;
     placeOrder(order: PlaceOrderDTO): Promise<void>;
