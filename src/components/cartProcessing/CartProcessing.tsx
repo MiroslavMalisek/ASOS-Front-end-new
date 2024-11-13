@@ -23,7 +23,7 @@ import { ProductInPlaceOrderDTO } from "../../services/orderDTOs/ProductInPlaceO
 
 export default function CartProcessing() {
   const stepperRef = useRef(null);
-  const { cartItems } = UseShoppingCart();
+  const { cartItems, clearCart } = UseShoppingCart();
 
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingGetData, setLoadingGetData] = useState<boolean>(false);
@@ -90,6 +90,9 @@ export default function CartProcessing() {
   useEffect(() => {
     // After successful place order change, display the message and dissmiss it after 5 seconds
     if (placeOrderSuccess) {
+
+      clearCart();
+
       const timer = setTimeout(() => {
         setPlaceOrderSuccess(false);
         setShowPlaceOrderSuccessMessage(false);

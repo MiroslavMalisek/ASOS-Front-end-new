@@ -59,31 +59,31 @@ const userDataEmail: UserCartDataDTO =
 };
 
 const productsInOrder0: ProductInOrderDTO[] = [
-    {id: 1, name: "IPhone", img_path: "iphone.webp"},
-    {id: 7, name: "Xiaomi kamera", img_path: "xiaomi_cam.webp"},
-    {id: 4, name: "LG práčka", img_path: "lg_pracka.webp"},
-    {id: 2, name: "Klávesnica", img_path: "klavesnica.webp"},
-    {id: 6, name: "Samsung mobil", img_path: "samsung_mobil.webp"},
-    {id: 7, name: "Xiaomi kamera", img_path: "xiaomi_cam.webp"},
-    {id: 7, name: "Xiaomi kamera", img_path: "xiaomi_cam.webp"},
-    {id: 7, name: "Xiaomi kamera", img_path: "xiaomi_cam.webp"},
-    {id: 7, name: "Xiaomi kamera", img_path: "xiaomi_cam.webp"},
-    {id: 7, name: "Xiaomi kamera", img_path: "xiaomi_cam.webp"},
-    {id: 7, name: "Xiaomi kamera", img_path: "xiaomi_cam.webp"},
-    {id: 7, name: "Xiaomi kamera", img_path: "xiaomi_cam.webp"},
-    {id: 2, name: "Klávesnica", img_path: "klavesnica.webp"},
-    {id: 2, name: "Klávesnica", img_path: "klavesnica.webp"},
-    {id: 2, name: "Klávesnica", img_path: "klavesnica.webp"},
-    {id: 2, name: "Klávesnica", img_path: "klavesnica.webp"},
+    {id: 1, name: "IPhone", img_path: "imgs/iphone.webp"},
+    {id: 7, name: "Xiaomi kamera", img_path: "imgs/xiaomi_cam.webp"},
+    {id: 4, name: "LG práčka", img_path: "imgs/lg_pracka.webp"},
+    {id: 2, name: "Klávesnica", img_path: "imgs/klavesnica.webp"},
+    {id: 6, name: "Samsung mobil", img_path: "imgs/samsung_mobil.webp"},
+    {id: 7, name: "Xiaomi kamera", img_path: "imgs/xiaomi_cam.webp"},
+    {id: 7, name: "Xiaomi kamera", img_path: "imgs/xiaomi_cam.webp"},
+    {id: 7, name: "Xiaomi kamera", img_path: "imgs/xiaomi_cam.webp"},
+    {id: 7, name: "Xiaomi kamera", img_path: "imgs/xiaomi_cam.webp"},
+    {id: 7, name: "Xiaomi kamera", img_path: "imgs/xiaomi_cam.webp"},
+    {id: 7, name: "Xiaomi kamera", img_path: "imgs/xiaomi_cam.webp"},
+    {id: 7, name: "Xiaomi kamera", img_path: "imgs/xiaomi_cam.webp"},
+    {id: 2, name: "Klávesnica", img_path: "imgs/klavesnica.webp"},
+    {id: 2, name: "Klávesnica", img_path: "imgs/klavesnica.webp"},
+    {id: 2, name: "Klávesnica", img_path: "imgs/klavesnica.webp"},
+    {id: 2, name: "Klávesnica", img_path: "imgs/klavesnica.webp"},
 
 ]
 
 const productsInOrder1: ProductInOrderDTO[] = [
-    {id: 4, name: "LG práčka", img_path: "lg_pracka.webp"},
-    {id: 2, name: "Klávesnica", img_path: "klavesnica.webp"},
-    {id: 6, name: "Samsung mobil", img_path: "samsung_mobil.webp"},
-    {id: 3, name: "Lenovo Notebook", img_path: "lenovo_pc.webp"},
-    {id: 7, name: "Xiaomi kamera", img_path: "xiaomi_cam.webp"},
+    {id: 4, name: "LG práčka", img_path: "imgs/lg_pracka.webp"},
+    {id: 2, name: "Klávesnica", img_path: "imgs/klavesnica.webp"},
+    {id: 6, name: "Samsung mobil", img_path: "imgs/samsung_mobil.webp"},
+    {id: 3, name: "Lenovo Notebook", img_path: "imgs/lenovo_pc.webp"},
+    {id: 7, name: "Xiaomi kamera", img_path: "imgs/xiaomi_cam.webp"},
 
 ]
 
