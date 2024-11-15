@@ -23,7 +23,8 @@
 }
 
 #search-bar-form{
-    width: 60%;
+    display: flex;
+    width: 100%;
 }
 
 #search-bar{
@@ -56,7 +57,11 @@
 
 
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
+    .navbar-collapse{
+        background-color: #f9f9f9;
+    }
+
     /* Remove full width and background when navbar is expanded */
     .nav-link {
         width: 100%;                 /* Full width */
@@ -77,7 +82,12 @@
     }
 
     .drop-down{
+        padding: 0;
         width: 70%;
+    }
+
+    .drop-down:hover{
+        border-color: #f9f9f9;
     }
 
 
@@ -168,7 +178,7 @@
     margin-bottom: 0.3rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
     .cart-user-section-in-navbar{
         flex-direction: row;
         gap: 2rem;

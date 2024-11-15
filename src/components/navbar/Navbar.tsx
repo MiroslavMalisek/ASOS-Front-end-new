@@ -49,7 +49,7 @@ const Navbar = () => {
   };
 
   return (
-    <Nb expand="md" fixed="top" className="bg-white shadow-sm navbar">
+    <Nb expand="lg" fixed="top" className="bg-white shadow-sm navbar">
       <Container className="d-flex justify-content-between align-items-center">
         <Nb.Brand href="/">
           <img id="navbar-logo" src={shopLogo} alt="ASOS logo" />

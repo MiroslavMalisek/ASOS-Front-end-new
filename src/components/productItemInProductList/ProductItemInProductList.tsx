@@ -1,20 +1,21 @@
 import "./ProductItemInProductList.css";
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import AddToCardButton from "../addToCartButton/AddToCardButton.tsx";
+import AddToCartButton from "../cartButtons/addToCartBtn/AddToCartButton.tsx";
 import { ProductItemInProductListProps } from "./ProductItemInProductListProps.ts";
 import { UseShoppingCart } from "../../contexts/shoppingCart/ShoppingCartContext.tsx";
 import formatCurrency from "../../utilities/formatCurrency.ts";
-import cartIcon from "../../assets/cart-fill.svg";
+import RemoveFromCartButton from "../cartButtons/removeFromCartBtn/RemoveFromCartButton.tsx";
+import DecreaseCartItemCuantityButton
+    from "../cartButtons/decreaseCartItemCuantityBtn/DecreaseCartItemCuantityButton.tsx";
+import IncreaseCartItemCuantityButton
+    from "../cartButtons/increaseCartItemCuantityBtn/IncreaseCartItemCuantityButton.tsx";
 
 const ProductItemInProductList = ({
   product,
 }: ProductItemInProductListProps) => {
   const {
     getItemQuantity,
-    increaseCartQuantity,
-    decreaseCartQuantity,
-    removeFromCart,
   } = UseShoppingCart();
   const quantity = getItemQuantity(product.id);
 
@@ -38,13 +39,7 @@ const ProductItemInProductList = ({
           <span className="product-price">{formatCurrency(product.price)}</span>
           <div className="mt-auto">
             {quantity === 0 ? (
-              <Button
-                className="add-to-cart-button"
-                onClick={() => increaseCartQuantity(product.id)}
-              >
-                <img src={cartIcon} alt="Add to Cart" className="button-icon" />
-                <span>Do košíka</span>
-              </Button>
+                <AddToCartButton productId={product.id} />
             ) : (
               <div
                 className="d-flex align=items-center flex-column"
@@ -54,32 +49,14 @@ const ProductItemInProductList = ({
                   className="d-flex align-items-center justify-content-center"
                   style={{ gap: ".5rem" }}
                 >
-                  <Button
-                    className="add-to-cart-button"
-                    style={{ width: "2.5rem", height: "2.5rem" }}
-                    onClick={() => decreaseCartQuantity(product.id)}
-                  >
-                    -
-                  </Button>
+                  <DecreaseCartItemCuantityButton productId={product.id}/>
                   <div>
                     V košíku: <></>
                     <span className="fs-3">{quantity}</span>
                   </div>
-                  <Button
-                    className="add-to-cart-button"
-                    style={{ width: "2.5rem", height: "2.5rem" }}
-                    onClick={() => increaseCartQuantity(product.id)}
-                  >
-                    +
-                  </Button>
+                  <IncreaseCartItemCuantityButton productId={product.id}/>
                 </div>
-                <Button
-                  variant="danger"
-                  size="sm"
-                  onClick={() => removeFromCart(product.id)}
-                >
-                  Remove
-                </Button>
+                <RemoveFromCartButton productId={product.id} />
               </div>
             )}
           </div>
