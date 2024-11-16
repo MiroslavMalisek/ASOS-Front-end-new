@@ -12,14 +12,15 @@ import { ServiceSelector } from "../../services/ServiceSelector.ts";
 import { ListGroup, Spinner, Stack } from "react-bootstrap";
 import { Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { UserDataDTO } from "../../services/userDTOs/UserDataDTO.ts";
 import { UseShoppingCart } from "../../contexts/shoppingCart/ShoppingCartContext.tsx";
 import storeItems from "../../data/items.json";
 import CartProcessingItem from "./CartProcessingItem.tsx";
 import CartProcessingUserDataForm from "./CartProcessingUserDataForm.tsx";
-import { UserCartDataDTO } from "../../services/userDTOs/UserCartDataDTO.ts";
+import { UserDataAllDTO } from "../../services/userDTOs/UserDataAllDTO.ts";
 import CartProcessingSummary from "./CartProcessingSummary.tsx";
 import { ProductInPlaceOrderDTO } from "../../services/orderDTOs/ProductInPlaceOrderDTO.ts";
+import formatCurrency from "../../utilities/formatCurrency.ts";
+import "./CartProcessingStyling.css"
 
 export default function CartProcessing() {
   const stepperRef = useRef(null);
@@ -39,7 +40,7 @@ export default function CartProcessing() {
   const [placeOrderExample, setPlaceOrderExample] =
     useState<PlaceOrderDTO | null>(null);
 
-  const [userCartData, setUserCartData] = useState<UserCartDataDTO>({
+  const [userCartData, setUserCartData] = useState<UserDataAllDTO>({
     first_name: "",
     last_name: "",
     street: "",
@@ -53,6 +54,8 @@ export default function CartProcessing() {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
   const navigate = useNavigate();
   const apiService = ServiceSelector;
+
+  const [total_price, setTotalPrice] = useState(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -108,7 +111,7 @@ export default function CartProcessing() {
       setLoadingGetData(true);
       try {
         if (isLoggedIn) {
-          const userCartData = await apiService.getUserCartData();
+          const userCartData = await apiService.getUserData();
           setUserCartData(userCartData);
         }
       } catch (error) {
@@ -137,10 +140,10 @@ export default function CartProcessing() {
       };
     });
 
-    const total_price = cartItems.reduce((total, cartItem) => {
+    setTotalPrice(cartItems.reduce((total, cartItem) => {
       const item = storeItems.find((item) => item.id === cartItem.id);
       return total + (item?.price || 0) * cartItem.quantity;
-    }, 0);
+    }, 0));
 
     //console.log("celkova cena je >>" + total_price + "<<");
 
@@ -177,51 +180,65 @@ export default function CartProcessing() {
             <StepperPanel header="Položky">
               <ListGroup variant="flush">
                 {cartItems.map((item) => (
-                  <CartProcessingItem key={item.id} {...item} />
+                    <CartProcessingItem key={item.id} {...item} />
                 ))}
               </ListGroup>
-              <div className="flex pt-4 justify-content-end">
+              <div className="d-flex justify-content-end me-auto fw-bold fs-5">
+                Celková suma:{" "}
+                {formatCurrency(
+                    total_price
+                )}
+              </div>
+              <div className="d-flex pt-4 justify-content-end">
                 <Button
-                  label="Pokračovať"
-                  icon="pi pi-arrow-right"
-                  iconPos="right"
-                  onClick={() => stepperRef.current.nextCallback()}
+                    label="Pokračovať"
+                    className="move-btn next-step"
+                    onClick={() => stepperRef.current.nextCallback()}
                 />
               </div>
             </StepperPanel>
             <StepperPanel header="Dodacie údaje">
               <CartProcessingUserDataForm
-                userCartData={userCartData}
-                handleChange={handleChange}
+                  userCartData={userCartData}
+                  handleChange={handleChange}
               />
-              <div className="flex pt-4 justify-content-between">
+              <div className="d-flex pt-4 justify-content-between">
                 <Button
-                  label="Back"
-                  severity="secondary"
-                  icon="pi pi-arrow-left"
-                  onClick={() => stepperRef.current.prevCallback()}
+                    label="Späť"
+                    severity="secondary"
+                    text raised
+                    className="move-btn back-step"
+                    onClick={() => stepperRef.current.prevCallback()}
                 />
                 <Button
-                  label="Next"
-                  icon="pi pi-arrow-right"
-                  iconPos="right"
+                  label="Pokračovať"
+                  className="move-btn next-step"
                   onClick={() => stepperRef.current.nextCallback()}
                 />
               </div>
             </StepperPanel>
-            <StepperPanel header="Doprava a platba">
-              <CartProcessingSummary userCartData={userCartData} />
+            <StepperPanel header="Súhrn">
+              <CartProcessingSummary userCartData={userCartData}/>
+              <div className="d-flex justify-content-end me-auto mt-4 fw-bold fs-5">
+                Celková suma:{" "}
+                {formatCurrency(
+                    total_price
+                )}
+              </div>
 
-              <div className="flex pt-4 justify-content-start">
+              <div className="d-flex pt-4 justify-content-between">
                 <Button
-                  label="Back"
-                  severity="secondary"
-                  icon="pi pi-arrow-left"
-                  onClick={() => stepperRef.current.prevCallback()}
+                    label="Späť"
+                    className="move-btn back-step"
+                    severity="secondary"
+                    text raised
+                    onClick={() => stepperRef.current.prevCallback()}
                 />
-                <Button type="button" onClick={handlePlaceOrderButton}>
-                  Odoslať objednávku
-                </Button>
+                <Button
+                    label="Odoslať objednávku"
+                    className="move-btn next-step"
+                    onClick={handlePlaceOrderButton}
+                />
               </div>
             </StepperPanel>
           </Stepper>

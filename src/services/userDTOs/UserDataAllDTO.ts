@@ -1,4 +1,5 @@
-export type UserCartDataDTO = {
+//User data also with email
+export type UserDataAllDTO = {
     first_name: string,
     last_name: string,
     street: string,

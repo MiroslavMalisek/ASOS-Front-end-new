@@ -13,7 +13,6 @@ import DecreaseCartItemCuantityButton
     from "../cartButtons/decreaseCartItemCuantityBtn/DecreaseCartItemCuantityButton.tsx";
 import IncreaseCartItemCuantityButton
     from "../cartButtons/increaseCartItemCuantityBtn/IncreaseCartItemCuantityButton.tsx";
-import RemoveFromCartButton from "../cartButtons/removeFromCartBtn/RemoveFromCartButton.tsx";
 
 const ProductView = ({ productId } : {productId: string}) => {
 

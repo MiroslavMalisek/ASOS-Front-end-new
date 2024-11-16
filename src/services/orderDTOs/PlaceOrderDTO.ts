@@ -1,9 +1,8 @@
 import {ProductInPlaceOrderDTO} from "./ProductInPlaceOrderDTO.ts";
-import {UserDataDTO} from "../userDTOs/UserDataDTO.ts";
-import { UserCartDataDTO } from "../userDTOs/UserCartDataDTO.ts";
+import { UserDataAllDTO } from "../userDTOs/UserDataAllDTO.ts";
 
 export interface PlaceOrderDTO{
-    customer: UserCartDataDTO;
+    customer: UserDataAllDTO;
     products_in_order: ProductInPlaceOrderDTO[];
     total_price: number;
 

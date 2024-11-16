@@ -10,7 +10,7 @@ import {OrderDTO} from "./orderDTOs/OrderDTO.ts";
 import {PlaceOrderDTO} from "./orderDTOs/PlaceOrderDTO.ts";
 import {ProductInOrderDTO} from "./orderDTOs/ProductInOrderDTO.ts";
 import {ProductInPlaceOrderDTO} from "./orderDTOs/ProductInPlaceOrderDTO.ts";
-import { UserCartDataDTO } from "./userDTOs/UserCartDataDTO.ts";
+import { UserDataAllDTO } from "./userDTOs/UserDataAllDTO.ts";
 
 const products: ProductDTO[] = [
     {id: 1, img_path: "imgs/iphone.webp", name: "Iphone", category_id: 1, category_name: "Mobily", short_description: "Toto je Iphone short popis",
@@ -45,7 +45,7 @@ const loginResponse: LoginResponseDTO = {
 const userData: UserDataDTO = {first_name: "Miroslav", last_name: "Malíšek", street: "Kvetná", house_number: "9B",
     zip_code: "89204", city: "Bratislava", country: "Slovensko", phone: "+421915076851"};
 
-const userDataEmail: UserCartDataDTO = 
+const userDataEmail: UserDataAllDTO =
 {
     first_name: "Miroslav", 
     last_name: "Malíšek",
@@ -239,11 +239,11 @@ export const MockService: IApiService = {
         });
     },
 
-    async getUserData(): Promise<UserDataDTO> {
+    async getUserData(): Promise<UserDataAllDTO> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 if (userData){
-                    resolve(userData);
+                    resolve(userDataEmail);
                 } else {
                     reject(new Error("Dáta sa nepodarilo získať"));
                 }
@@ -251,7 +251,7 @@ export const MockService: IApiService = {
         });
     },
 
-    async getUserCartData(): Promise<UserCartDataDTO> {
+    /*async getUserCartData(): Promise<UserDataAllDTO> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 if (userDataEmail){
@@ -261,7 +261,7 @@ export const MockService: IApiService = {
                 }
             }, 500);
         });
-    },
+    },*/
 
     async changeUserData(userData: UserDataDTO): Promise<UserDataDTO> {
         return new Promise((resolve, reject) => {
@@ -290,7 +290,11 @@ export const MockService: IApiService = {
     placeOrder(order: PlaceOrderDTO): Promise<void> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve()
+                if (order){
+                    reject(new Error("Nepodarilo sa vytvoriť objednávku"));
+                }else {
+                    resolve()
+                }
                 /* if (order.total_price != placeOrder0.total_price) {
                     reject(new Error("Celková cena nie je správna"));
                 } else {
