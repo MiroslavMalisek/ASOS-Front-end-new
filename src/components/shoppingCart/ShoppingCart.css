@@ -1,0 +1,14 @@
+.to-cart-btn{
+    background-color: var(--product-font-color);
+    border: none;
+    font-weight: 600;
+}
+
+
+.to-cart-btn:hover{
+    background-color: #005792
+}
+
+.to-cart-btn:active{
+    background-color: #005792
+}

@@ -1,0 +1,52 @@
+.product-name-link{
+    text-decoration: none; /* Underline the text */
+}
+
+.product-name-link:hover .product-name {
+    text-decoration: underline;
+    text-decoration-color: var(--product-font-color);
+}
+
+.product-name {
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: var(--product-font-color);
+}
+
+#summary {
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--product-font-color);
+}
+
+.product-price {
+    white-space: nowrap;
+    font-size: 1rem;   /* Slightly larger than regular text */
+         /* Medium font weight for a moderate emphasis */
+    color: var(--product-price-font-color);
+}
+
+.move-btn{
+    min-width: 15%;
+}
+
+.move-btn.back-step{
+    background-color: #f9f9f9;
+}
+
+.move-btn.back-step:hover{
+    border-color: var(--product-font-color);
+}
+
+.move-btn.next-step{
+    background-color: var(--product-font-color);
+    border: none;
+}
+
+.move-btn.next-step:hover{
+    background-color: #005792
+}
+
+.p-highlight .p-stepper-number{
+    background-color: var(--product-font-color);
+}

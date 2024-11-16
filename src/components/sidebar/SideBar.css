@@ -1,12 +1,16 @@
 .side-bar-container {
     display: flex;
-    flex-direction: column; /* Default to a column layout */
-    background-color: #f9f9f9;  /* Light gray background */
+    flex-direction: row;
+    gap:0.5rem;
+    flex-wrap: wrap; /* Allow items to wrap */
     margin-top: 0.5rem;
 }
 
 .category-item {
-    flex: 1;
+    flex: 1 1 calc(50% - 0.5rem); /* Two columns */
+    max-width: 50%;
+    background-color: #f9f9f9;  /* Light gray background */
+    margin-top: 0;
     cursor: pointer;
     border-radius: 5px;         /* Rounded corners */
     border: rgba(0, 0, 0, 0.05) solid 1px;
@@ -31,26 +35,12 @@
     text-decoration: underline;
 }
 
-/* When the viewport is small (sm) */
-@media (min-width: 576px) {
-    .side-bar-container {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap; /* Allow items to wrap */
-    }
-
-    .category-item {
-        flex: 1 0 45%; /* Two columns */
-        margin-top: 0;
-    }
-}
-
-/* When the viewport is medium (md) */
+/* When the viewport is medium (lg) */
 @media (min-width: 992px) {
     .side-bar-container {
-        display: flex; /* Reset to default display for md */
         flex-direction: column;
         flex-wrap: nowrap;
+        background-color: #f9f9f9;  /* Light gray background */
         gap: 0;
         border-right: rgba(0, 0, 0, 0.12) solid 1px;
         border-bottom: rgba(0, 0, 0, 0.12) solid 1px;
@@ -59,6 +49,7 @@
 
     .category-item {
         flex: 1;
+        max-width: 100%;
         margin: 0;
         border-radius: 0;
         border-top: none;

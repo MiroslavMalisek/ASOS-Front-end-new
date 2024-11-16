@@ -10,13 +10,13 @@ import {OrderDTO} from "./orderDTOs/OrderDTO.ts";
 import {PlaceOrderDTO} from "./orderDTOs/PlaceOrderDTO.ts";
 import {ProductInOrderDTO} from "./orderDTOs/ProductInOrderDTO.ts";
 import {ProductInPlaceOrderDTO} from "./orderDTOs/ProductInPlaceOrderDTO.ts";
-import { UserCartDataDTO } from "./userDTOs/UserCartDataDTO.ts";
+import { UserDataAllDTO } from "./userDTOs/UserDataAllDTO.ts";
 
 const products: ProductDTO[] = [
     {id: 1, img_path: "imgs/iphone.webp", name: "Iphone", category_id: 1, category_name: "Mobily", short_description: "Toto je Iphone short popis",
-        long_description: "Toto je Iphone long popis", price: 1089.78, stock: 5},
+        long_description: "Lorem ipsum odor amet, consectetuer adipiscing elit. Aliquet pretium pellentesque eu cras augue nulla condimentum neque. Etiam senectus laoreet hac nec ex. Congue ipsum platea; arcu maecenas tortor aliquet suspendisse. Faucibus lectus velit primis; turpis nulla fermentum adipiscing. Faucibus pharetra per lectus imperdiet nullam morbi blandit. Feugiat natoque aptent fusce tristique eget consequat duis pulvinar.", price: 1089.78, stock: 5},
     {id: 2, img_path: "imgs/klavesnica.webp", name: "Klávesnica", category_id: 4, category_name: "Iné", short_description: "Toto je klávesnica short popis",
-        long_description: "Toto je klávesnica long popis", price: 39.99, stock: 1},
+        long_description: "Lorem ipsum odor amet, consectetuer adipiscing elit. Aliquet pretium pellentesque eu cras augue nulla condimentum neque. Etiam senectus laoreet hac nec ex. Congue ipsum platea; arcu maecenas tortor aliquet suspendisse. Faucibus lectus velit primis; turpis nulla fermentum adipiscing. Faucibus pharetra per lectus imperdiet nullam morbi blandit. Feugiat natoque aptent fusce tristique eget consequat duis pulvinar.", price: 39.99, stock: 1},
     {id: 3, img_path: "imgs/lenovo_pc.webp", name: "Lenovo Notebook", category_id: 2, category_name: "Počítače",
         short_description: "Toto je Lenovo notebook short popis",
         long_description: "Toto je Lenovo notebook long popis", price: 1200, stock: 20},
@@ -45,7 +45,7 @@ const loginResponse: LoginResponseDTO = {
 const userData: UserDataDTO = {first_name: "Miroslav", last_name: "Malíšek", street: "Kvetná", house_number: "9B",
     zip_code: "89204", city: "Bratislava", country: "Slovensko", phone: "+421915076851"};
 
-const userDataEmail: UserCartDataDTO = 
+const userDataEmail: UserDataAllDTO =
 {
     first_name: "Miroslav", 
     last_name: "Malíšek",
@@ -239,11 +239,11 @@ export const MockService: IApiService = {
         });
     },
 
-    async getUserData(): Promise<UserDataDTO> {
+    async getUserData(): Promise<UserDataAllDTO> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 if (userData){
-                    resolve(userData);
+                    resolve(userDataEmail);
                 } else {
                     reject(new Error("Dáta sa nepodarilo získať"));
                 }
@@ -251,7 +251,7 @@ export const MockService: IApiService = {
         });
     },
 
-    async getUserCartData(): Promise<UserCartDataDTO> {
+    /*async getUserCartData(): Promise<UserDataAllDTO> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 if (userDataEmail){
@@ -261,7 +261,7 @@ export const MockService: IApiService = {
                 }
             }, 500);
         });
-    },
+    },*/
 
     async changeUserData(userData: UserDataDTO): Promise<UserDataDTO> {
         return new Promise((resolve, reject) => {
@@ -290,7 +290,11 @@ export const MockService: IApiService = {
     placeOrder(order: PlaceOrderDTO): Promise<void> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve()
+                if (order){
+                    reject(new Error("Nepodarilo sa vytvoriť objednávku"));
+                }else {
+                    resolve()
+                }
                 /* if (order.total_price != placeOrder0.total_price) {
                     reject(new Error("Celková cena nie je správna"));
                 } else {

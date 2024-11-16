@@ -1,3 +1,4 @@
+//User data without email (for use in user profile put change)
 export type UserDataDTO = {
     first_name: string,
     last_name: string,

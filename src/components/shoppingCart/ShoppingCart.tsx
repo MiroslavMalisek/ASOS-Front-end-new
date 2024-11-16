@@ -4,6 +4,7 @@ import { CartItem } from "./CartItem";
 import formatCurrency from "../../utilities/formatCurrency";
 import storeItems from "../../data/items.json";
 import { useNavigate } from "react-router-dom";
+import "./ShoppingCart.css"
 
 type ShoppingCartProps = {
   isOpen: boolean;
@@ -25,7 +26,7 @@ export function ShoppingCart({ isOpen }: ShoppingCartProps) {
               <CartItem key={item.id} {...item} />
             ))}
             <div className="ms-auto fw-bold fs-5">
-              Total:{" "}
+              Celková suma:{" "}
               {formatCurrency(
                 cartItems.reduce((total, cartItem) => {
                   const item = storeItems.find(
@@ -37,13 +38,13 @@ export function ShoppingCart({ isOpen }: ShoppingCartProps) {
             </div>
             <Button
               variant="primary"
-              className="mt-3"
+              className="mt-3 to-cart-btn"
               onClick={() => {
                 closeCart();
                 navigate("/cart");
               }}
             >
-              Do košíka
+              Do košíku
             </Button>
           </Stack>
         </Offcanvas.Body>

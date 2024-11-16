@@ -3,16 +3,27 @@ import homeIcon from "../../assets/home.svg";
 import {Link} from "react-router-dom";
 import './ProductView.css'
 import {useEffect, useState} from "react";
-import AddToCartButton from "../addToCartButton/AddToCardButton.tsx";
+import AddToCartButton from "../cartButtons/addToCartBtn/AddToCartButton.tsx";
 import {ServiceSelector} from "../../services/ServiceSelector.ts";
 import {ProductDTO} from "../../services/productDTOs/ProductDTO.ts";
 import {Alert} from "@mui/material";
+import formatCurrency from "../../utilities/formatCurrency.ts";
+import {UseShoppingCart} from "../../contexts/shoppingCart/ShoppingCartContext.tsx";
+import DecreaseCartItemCuantityButton
+    from "../cartButtons/decreaseCartItemCuantityBtn/DecreaseCartItemCuantityButton.tsx";
+import IncreaseCartItemCuantityButton
+    from "../cartButtons/increaseCartItemCuantityBtn/IncreaseCartItemCuantityButton.tsx";
 
 const ProductView = ({ productId } : {productId: string}) => {
 
     const [product, setProduct] = useState<ProductDTO | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+
+    const {
+        getItemQuantity,
+    } = UseShoppingCart();
+    const quantity = getItemQuantity(Number(productId));
 
     const apiService = ServiceSelector;
 
@@ -76,8 +87,27 @@ const ProductView = ({ productId } : {productId: string}) => {
                                         ? "Nedostupné"
                                         : `Na sklade ${product?.stock} ks`}</p>
                                     <div className="product-price-cart-div">
-                                        <p className="product-view-price my-0 me-4">{product?.price} €</p>
-                                        <AddToCartButton/>
+                                        <p className="product-view-price my-0 me-4">{formatCurrency(product?.price)}</p>
+                                        {quantity === 0 ? (
+                                            <AddToCartButton productId={Number(productId)} />
+                                        ) : (
+                                            <div
+                                                className="d-flex align=items-center flex-column"
+                                                style={{ gap: ".5rem" }}
+                                            >
+                                                <div
+                                                    className="d-flex align-items-center justify-content-center"
+                                                    style={{ gap: ".5rem" }}
+                                                >
+                                                    <DecreaseCartItemCuantityButton productId={Number(productId)}/>
+                                                    <div>
+                                                        V košíku: <></>
+                                                        <span className="fs-3">{quantity}</span>
+                                                    </div>
+                                                    <IncreaseCartItemCuantityButton productId={Number(productId)}/>
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
 
                                 </div>

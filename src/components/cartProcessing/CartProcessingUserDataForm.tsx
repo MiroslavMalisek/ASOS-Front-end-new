@@ -1,8 +1,8 @@
 import { Col, Form, Row } from "react-bootstrap";
-import { UserCartDataDTO } from "../../services/userDTOs/UserCartDataDTO.ts";
+import { UserDataAllDTO } from "../../services/userDTOs/UserDataAllDTO.ts";
 
 type CartProcessingUserDataFormProps = {
-  userCartData: UserCartDataDTO;
+  userCartData: UserDataAllDTO;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -21,6 +21,7 @@ function CartProcessingUserDataForm({ userCartData, handleChange }: CartProcessi
                     name="first_name"
                     value={userCartData.first_name}
                     onChange={handleChange}
+                    required
                   />
                 </Form.Group>
               </Col>
