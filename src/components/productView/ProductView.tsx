@@ -74,7 +74,7 @@ const ProductView = ({ productId } : {productId: string}) => {
                     <Card className="product-card">
                         <div className="row">
                             <div className="col-image col-12 col-lg-6">
-                                <ImageModal src={`/${product?.img_path}`} alt="Obrázok"/>
+                                <ImageModal src={`${import.meta.env.VITE_BE_BASE_URL}/${product?.img_path}`} alt="Obrázok"/>
                             </div>
                             <div className="col-other col-12 col-lg-6">
                                 <h1 className="product-view-name">{product?.name}</h1>

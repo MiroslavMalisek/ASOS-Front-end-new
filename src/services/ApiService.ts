@@ -9,6 +9,7 @@ import {UserDataDTO} from "./userDTOs/UserDataDTO.ts";
 import {OrderDTO} from "./orderDTOs/OrderDTO.ts";
 import {PlaceOrderDTO} from "./orderDTOs/PlaceOrderDTO.ts";
 import {UserDataAllDTO} from "./userDTOs/UserDataAllDTO.ts";
+import {ErrorDTO} from "./userDTOs/ErrorDTO.ts";
 
 export const ApiService: IApiService = {
 
@@ -178,7 +179,7 @@ export const ApiService: IApiService = {
     },
 
     async register(registerData: RegisterDTO): Promise<void> {
-        let endpoint = `/user/register`;
+        let endpoint = `/register`;
         let url = `${this.BASE_URL}${endpoint}`
         try {
             const response = await fetch(url, {
@@ -189,17 +190,19 @@ export const ApiService: IApiService = {
                 body: JSON.stringify(registerData),
             });
             if (!response.ok) {
-                throw new Error(`Failed to register: ${response.statusText}`);
+                const errorResponse: ErrorDTO = await response.json().catch(() => ({ message: 'Neznáma chyba. Skúste sa registrovať znovu.' })); // Default error if parsing fails
+                const errorMessage = errorResponse.errors;
+                throw new Error(errorMessage);
             }
             return await response.json();
         } catch (error) {
-            console.error('Error registering:', error);
-            throw error;
+            console.log(error instanceof Error ? error.message : 'Neznáma chyba. Skúste sa registrovať znovu.');
+            throw new Error(error instanceof Error ? error.message : 'Neznáma chyba. Skúste sa registrovať znovu.');
         }
     },
 
     async login(loginData: LoginDTO): Promise<LoginResponseDTO> {
-        let endpoint = `/user/login`;
+        let endpoint = `/login`;
         let url = `${this.BASE_URL}${endpoint}`
         try {
             const response = await fetch(url, {
@@ -210,17 +213,19 @@ export const ApiService: IApiService = {
                 body: JSON.stringify(loginData),
             });
             if (!response.ok) {
-                throw new Error(`Failed to login: ${response.statusText}`);
+                const errorResponse: ErrorDTO = await response.json().catch(() => ({ message: 'Neznáma chyba. Skúste sa prihlásiť znovu.' })); // Default error if parsing fails
+                const errorMessage = errorResponse.errors;
+                throw new Error(errorMessage);
             }
             return await response.json();
         } catch (error) {
-            console.error('Error logging in:', error);
-            throw error;
+            console.log(error instanceof Error ? error.message : 'Neznáma chyba. Skúste sa prihlásiť znovu.');
+            throw new Error(error instanceof Error ? error.message : 'Neznáma chyba. Skúste sa prihlásiť znovu.');
         }
     },
 
     async logout(): Promise<void> {
-        let endpoint = `/user/logout`;
+        let endpoint = `/logout`;
         let url = `${this.BASE_URL}${endpoint}`
         try {
             const response = await fetch(url, {
@@ -228,6 +233,7 @@ export const ApiService: IApiService = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                credentials: 'same-origin'
             });
             if (!response.ok) {
                 throw new Error(`Failed to log out: ${response.statusText}`);

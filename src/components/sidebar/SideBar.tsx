@@ -30,7 +30,7 @@ const SideBar = () => {
         };
 
         fetchCategories();
-    }, [categories]);
+    }, []);
 
     return (
         <div className="col col-lg-2 side-bar-container p-0 m-0">
