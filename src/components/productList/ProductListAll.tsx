@@ -27,7 +27,7 @@ const ProductListAll = () => {
         };
 
         fetchProducts();
-    }, [products]);
+    }, []);
 
     return (
         <>

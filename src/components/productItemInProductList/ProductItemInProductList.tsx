@@ -25,7 +25,7 @@ const ProductItemInProductList = ({
         <Card.Img
           className="product-image"
           variant="top"
-          src={`/${product.img_path}`}
+          src={`${import.meta.env.VITE_BE_BASE_URL}/${product.img_path}`}
         />
       </Link>
       <Card.Body className="card-body">

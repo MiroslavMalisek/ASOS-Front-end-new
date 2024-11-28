@@ -31,7 +31,7 @@ export function LoginForm() {
             setLoginSuccess(true)
             setShowLoginSuccessMessage(true)
         }catch (error) {
-            setError({ message: (error as Error).message || "Prihlásenie sa nepodarilo. Skúste to znovu." });
+            setError({ message: (error as Error).message });
         }finally {
             setLoading(false)
 
@@ -80,7 +80,7 @@ export function LoginForm() {
                         </Form.Group>
 
                         {error && <div className="error-message-div mb-3 mt-4">
-                            <Alert variant="filled" severity="error" className="error-message ">
+                            <Alert severity="error" className="error-message ">
                                 {error.message}</Alert>
                         </div>}
 
