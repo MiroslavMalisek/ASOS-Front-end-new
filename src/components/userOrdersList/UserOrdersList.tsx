@@ -21,13 +21,13 @@ const UserOrdersList = () => {
                 const orders = await apiService.getOrders()
                 setOrders(orders);
             }catch (error) {
-                setError({ message: (error as Error).message || "Objednávky sa nepodarilo získať. Skúste to znovu." });
+                setError({ message: (error as Error).message });
             }finally {
                 setLoading(false)
             }
         };
         fetchOrders();
-    }, [orders]);
+    }, []);
 
     return (
         <>

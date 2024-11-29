@@ -1,17 +1,13 @@
 import { Button, Stack, Image } from "react-bootstrap";
 import { UseShoppingCart } from "../../contexts/shoppingCart/ShoppingCartContext";
-import storeItems from "../../data/items.json";
 import formatCurrency from "../../utilities/formatCurrency";
+import {CartItem} from "../../contexts/shoppingCart/CartItem.ts";
 
-type CartItemProps = {
-  id: number;
-  quantity: number;
-};
 
-export function CartItem({ id, quantity }: CartItemProps) {
+export function CartItemInModal({ id, name, photo_path, price, quantity }: CartItem) {
   const { removeFromCart } = UseShoppingCart();
-  const item = storeItems.find((item) => item.id === id);
-  if (item == null) return null;
+  /*const item = storeItems.find((item) => item.id === id);
+  if (item == null) return null;*/
 
   return (
     <>
@@ -29,15 +25,15 @@ export function CartItem({ id, quantity }: CartItemProps) {
           }}
         /> */}
         <Image
-          src={item.img_path}
-          alt={item.name}
+          src={photo_path}
+          alt={name}
           className="item-image mr-3"
           style={{ width: "60px" }}
           fluid
         />
         <div className="me-auto">
           <div>
-            {item.name}{" "}
+            {name}{" "}
             {quantity > 1 && (
               <span className="text-muted" style={{ fontSize: ".65rem" }}>
                 x{quantity}
@@ -45,14 +41,14 @@ export function CartItem({ id, quantity }: CartItemProps) {
             )}
           </div>
           <div className="text-muted" style={{ fontSize: ".75rem" }}>
-            {formatCurrency(item.price)}
+            {formatCurrency(price)}
           </div>
         </div>
-        <div>{formatCurrency(item.price * quantity)}</div>
+        <div>{formatCurrency(price * quantity)}</div>
         <Button
           variant="outline-danger"
           size="sm"
-          onClick={() => removeFromCart(item.id)}
+          onClick={() => removeFromCart(id)}
           style={{ width: "2rem", height: "2rem" }}
         >
           &times;

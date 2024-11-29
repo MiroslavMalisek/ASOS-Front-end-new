@@ -35,7 +35,7 @@ const ProductListByCategory = ({ categoryName } : {categoryName: string}) => {
                     setProducts([]); // Clear any previous products
                 }
             } catch (error) {
-                setError((error as Error).message || "Nepodarilo sa získať produkty");
+                setError((error as Error).message || "Nepodarilo sa načítať produkty");
             } finally {
                 setLoading(false);
             }

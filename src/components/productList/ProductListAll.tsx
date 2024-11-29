@@ -20,7 +20,7 @@ const ProductListAll = () => {
                 const products = await apiService.getProducts();
                 setProducts(products);
             } catch (error) {
-                setError((error as Error).message || "Nepodarilo sa získať produkty");
+                setError((error as Error).message || "Nepodarilo sa načítať produkty");
             } finally {
                 setLoading(false);
             }

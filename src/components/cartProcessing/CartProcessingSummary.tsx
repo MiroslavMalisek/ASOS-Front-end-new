@@ -1,7 +1,6 @@
 import { Card, Col, ListGroup, Row } from "react-bootstrap";
 import { UseShoppingCart } from "../../contexts/shoppingCart/ShoppingCartContext";
 import { UserDataAllDTO } from "../../services/userDTOs/UserDataAllDTO.ts";
-import storeItems from "../../data/items.json";
 import formatCurrency from "../../utilities/formatCurrency";
 import {Link} from "react-router-dom";
 import "./CartProcessingStyling.css"
@@ -17,28 +16,26 @@ function CartProcessingSummary({ userCartData }: CartProcessingSummaryProps) {
     <>
       <Card>
         <Card.Header as="h5" className="text-center">
-          SÚHRN
+          SÚHRN OBJEDNÁVKY
         </Card.Header>
         <Card.Body>
           {/* Product Summary */}
           <h6>Produkty</h6>
           <ListGroup variant="flush">
-            {cartItems.map((cartItem) => { 
-                var item = storeItems.find((item) => item.id === cartItem.id);     
-                if (item == null) return null;         
+            {cartItems.map((cartItem) => {
                 return (
-              <ListGroup.Item key={item.id}>
+              <ListGroup.Item key={cartItem.id}>
                 <Row>
                   <Col xs={2} md={1}>
                     {cartItem.quantity}x
                   </Col>
                   <Col xs={6} sm={6} md={8} className="text-truncate">
-                    <Link to={`/product/${item.id}`} className="product-name-link">
-                      <p className="product-name" id="summary">{item.name}</p>
+                    <Link to={`/product/${cartItem.id}`} className="product-name-link">
+                      <p className="product-name" id="summary">{cartItem.name}</p>
                     </Link>
                   </Col>
                   <Col xs={4} sm={4} md={3} className="text-end">
-                    <p className="product-price">{formatCurrency(cartItem.quantity * item.price)}</p>
+                    <p className="product-price">{formatCurrency(cartItem.quantity * cartItem.price)}</p>
                   </Col>
                 </Row>
               </ListGroup.Item>
@@ -47,7 +44,7 @@ function CartProcessingSummary({ userCartData }: CartProcessingSummaryProps) {
 
           {/* Delivery Information */}
           <div className="mt-4">
-            <h6>Dodacie údaje</h6>
+            <h5>Osobné údaje</h5>
             <Card.Text>
               <strong>Meno:</strong> {userCartData.first_name}{" "}
               {userCartData.last_name}
@@ -69,7 +66,7 @@ function CartProcessingSummary({ userCartData }: CartProcessingSummaryProps) {
               <strong>Krajina:</strong> {userCartData.country}
             </Card.Text>
             <Card.Text>
-              <strong>Číslo:</strong> {userCartData.phone}
+              <strong>Telefónne číslo:</strong> {userCartData.phone}
             </Card.Text>
           </div>
         </Card.Body>

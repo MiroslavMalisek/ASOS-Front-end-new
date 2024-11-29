@@ -22,8 +22,8 @@ import { ShoppingCartProvider } from "./contexts/shoppingCart/ShoppingCartContex
 function App() {
   return (
     <>
-      <AuthProvider>
-        <ShoppingCartProvider>
+      <ShoppingCartProvider>
+        <AuthProvider>
           <HelmetProvider>
             <PrimeReactProvider>
               <MainLayout>
@@ -45,8 +45,8 @@ function App() {
               </MainLayout>
             </PrimeReactProvider>
           </HelmetProvider>
-        </ShoppingCartProvider>
-      </AuthProvider>
+        </AuthProvider>
+      </ShoppingCartProvider>
     </>
   );
 }
