@@ -29,7 +29,7 @@ function CartProcessingSummary({ userCartData }: CartProcessingSummaryProps) {
                   <Col xs={2} md={1}>
                     {cartItem.quantity}x
                   </Col>
-                  <Col xs={6} sm={6} md={8} className="text-truncate">
+                  <Col xs={6} sm={6} md={8}>
                     <Link to={`/product/${cartItem.id}`} className="product-name-link">
                       <p className="product-name" id="summary">{cartItem.name}</p>
                     </Link>
@@ -44,13 +44,10 @@ function CartProcessingSummary({ userCartData }: CartProcessingSummaryProps) {
 
           {/* Delivery Information */}
           <div className="mt-4">
-            <h5>Osobné údaje</h5>
+            <h5>Údaje o zákazníkovi</h5>
             <Card.Text>
-              <strong>Meno:</strong> {userCartData.first_name}{" "}
+              <strong>Meno a priezvisko:</strong> {userCartData.first_name}{" "}
               {userCartData.last_name}
-            </Card.Text>
-            <Card.Text>
-              <strong>Email:</strong> {userCartData.email}
             </Card.Text>
             <Card.Text>
               <strong>Adresa:</strong> {userCartData.street}{" "}
@@ -64,6 +61,9 @@ function CartProcessingSummary({ userCartData }: CartProcessingSummaryProps) {
             </Card.Text>
             <Card.Text>
               <strong>Krajina:</strong> {userCartData.country}
+            </Card.Text>
+            <Card.Text>
+              <strong>Email:</strong> {userCartData.email}
             </Card.Text>
             <Card.Text>
               <strong>Telefónne číslo:</strong> {userCartData.phone}

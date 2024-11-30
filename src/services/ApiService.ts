@@ -129,7 +129,7 @@ export const ApiService: IApiService = {
             });
             if (!response.ok) {
                 const errorResponse: ErrorDTO = await response.json().catch(() => ({ message: 'Neznáma chyba.' })); // Default error if parsing fails
-                const errorMessage = errorResponse.errors;
+                const errorMessage = errorResponse.message;
                 throw new Error(errorMessage);
             }
             return await response.json();
@@ -153,7 +153,7 @@ export const ApiService: IApiService = {
             });
             if (!response.ok) {
                 const errorResponse: ErrorDTO = await response.json().catch(() => ({ message: 'Neznáma chyba.' })); // Default error if parsing fails
-                const errorMessage = errorResponse.errors;
+                const errorMessage = errorResponse.message;
                 throw new Error(errorMessage);
             }
             return await response.json();

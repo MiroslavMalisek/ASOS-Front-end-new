@@ -1,7 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import {Stepper} from "primereact/stepper";
 import {StepperPanel} from "primereact/stepperpanel";
-import {Steps} from "primereact/steps";
 import {Button} from "primereact/button";
 import "primereact/resources/primereact.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
@@ -9,11 +8,10 @@ import "./CartProcessing.css";
 import {PlaceOrderDTO} from "../../services/orderDTOs/PlaceOrderDTO.ts";
 import {placeOrder0} from "../../services/MockService.ts";
 import {ServiceSelector} from "../../services/ServiceSelector.ts";
-import {ListGroup, Spinner, Stack} from "react-bootstrap";
+import {ListGroup, Spinner} from "react-bootstrap";
 import {Alert} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {UseShoppingCart} from "../../contexts/shoppingCart/ShoppingCartContext.tsx";
-import storeItems from "../../data/items.json";
 import CartProcessingItem from "./CartProcessingItem.tsx";
 import CartProcessingUserDataForm from "./CartProcessingUserDataForm.tsx";
 import {UserDataAllDTO} from "../../services/userDTOs/UserDataAllDTO.ts";
@@ -238,7 +236,7 @@ export default function CartProcessing() {
                                 />
                             </div>
                         </StepperPanel>
-                        <StepperPanel header="Osobné údaje">
+                        <StepperPanel header="Údaje o zákazníkovi">
                             <CartProcessingUserDataForm
                                 userCartData={userCartData}
                                 handleChange={handleChange}

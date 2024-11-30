@@ -43,20 +43,20 @@ function CartProcessingItem({id, name, photo_path, price, quantity}: CartItem) {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const isSmallScreen = windowWidth >= 576; // sm breakpoint (Bootstrap)
-    const isExtraSmallScreen = windowWidth < 576; // xs breakpoint (Bootstrap)
+    const isMediumScreen = windowWidth >= 768; // sm breakpoint (Bootstrap)
+    const isSmallScreen = windowWidth < 768; // xs breakpoint (Bootstrap)
 
     return (
         <>
-            {isExtraSmallScreen && (
+            {isSmallScreen && (
                 <Card key={id} className="d-flex flex-column mb-3">
                     <Row className="no-gutters">
-                        <Col xs={4} className="d-flex justify-content-center">
+                        <Col xs={4} className="d-flex justify-content-center align-items-center">
                             <Link to={`/product/${id}`}>
                                 <Image
                                     src={photo_path}
                                     alt={name}
-                                    style={{width: "80px"}}
+                                    style={{width: "75px", objectFit: 'contain'}}
                                     fluid
                                 />
                             </Link>
@@ -67,7 +67,7 @@ function CartProcessingItem({id, name, photo_path, price, quantity}: CartItem) {
                         >
                             <Card.Body>
                                 <Link to={`/product/${id}`} className="product-name-link">
-                                    <h5>{name}</h5>
+                                    <h5 className="product-name">{name}</h5>
                                 </Link>
                             </Card.Body>
                         </Col>
@@ -97,7 +97,7 @@ function CartProcessingItem({id, name, photo_path, price, quantity}: CartItem) {
                     </Card.Footer>
                 </Card>
             )}
-            {isSmallScreen && (
+            {isMediumScreen && (
                 <ListGroup.Item key={id} className="d-flex flex-column mb-3">
                     <Row className="w-100">
                         <Col xs={4} sm={3} className="d-flex justify-content-center">
