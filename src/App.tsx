@@ -18,6 +18,7 @@ import "primereact/resources/primereact.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import { ProductsByCategory } from "./pages/ProductsByCategory.tsx";
 import { ShoppingCartProvider } from "./contexts/shoppingCart/ShoppingCartContext.tsx";
+import ProtectedRoute from "./ProtectedRoute.tsx";
 
 function App() {
   return (
@@ -36,10 +37,18 @@ function App() {
                   <Route path="/product/:id" element={<Product />} />
                   <Route path="/about-us" element={<AboutUs />} />
                   <Route path="/contact" element={<Contact />} />
-                  <Route path="/register" element={<Register />} />
+                  <Route path="/register" element={<Register />}/>
                   <Route path="/login" element={<Login />} />
-                  <Route path="/profile" element={<UserProfile />} />
-                  <Route path="/orders" element={<UserOrders />} />
+                  <Route path="/profile" element={
+                    <ProtectedRoute>
+                      <UserProfile />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/orders" element={
+                    <ProtectedRoute>
+                      <UserOrders />
+                    </ProtectedRoute>
+                  } />
                   <Route path="/cart" element={<Cart />} />
                 </Routes>
               </MainLayout>
