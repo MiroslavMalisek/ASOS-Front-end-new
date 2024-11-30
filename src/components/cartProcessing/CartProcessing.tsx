@@ -6,7 +6,6 @@ import "primereact/resources/primereact.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "./CartProcessing.css";
 import {PlaceOrderDTO} from "../../services/orderDTOs/PlaceOrderDTO.ts";
-import {placeOrder0} from "../../services/MockService.ts";
 import {ServiceSelector} from "../../services/ServiceSelector.ts";
 import {ListGroup, Spinner} from "react-bootstrap";
 import {Alert} from "@mui/material";

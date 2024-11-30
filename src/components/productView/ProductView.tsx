@@ -87,7 +87,7 @@ const ProductView = ({ productId } : {productId: string}) => {
                                         ? "Nedostupné"
                                         : `Na sklade ${product?.stock} ks`}</p>
                                     <div className="product-price-cart-div">
-                                        <p className="product-view-price my-0 me-4">{formatCurrency(product?.price)}</p>
+                                        <p className="product-view-price my-0 me-4">{product && (formatCurrency(product.price))}</p>
                                         {quantity === 0 ? (
                                                 product && (<AddToCartButton product={product} />)
                                         ) : (
