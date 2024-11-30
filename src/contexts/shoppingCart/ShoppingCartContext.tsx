@@ -18,6 +18,7 @@ type ShoppingCartContext = {
     removeFromCart: (productId: number) => void;
     clearCart: () => void;
     cartQuantity: number;
+    isCartEmpty: () => boolean;
     cartItems: CartItem[];
 }
 
@@ -98,6 +99,10 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         });
     }
 
+    function isCartEmpty() {
+        return cartItems.length === 0;
+    }
+
     function clearCart() {
         setCartItems([]);
     }
@@ -113,6 +118,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
                 increaseCartQuantity,
                 decreaseCartQuantity,
                 removeFromCart,
+                isCartEmpty,
                 clearCart,
                 cartQuantity,
                 cartItems

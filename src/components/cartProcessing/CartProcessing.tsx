@@ -21,12 +21,13 @@ import "./CartProcessingStyling.css"
 
 export default function CartProcessing() {
     const stepperRef = useRef(null);
-    const {cartItems, clearCart} = UseShoppingCart();
+    const {cartItems, isCartEmpty, clearCart} = UseShoppingCart();
 
     const [loading, setLoading] = useState<boolean>(false);
     const [loadingGetData, setLoadingGetData] = useState<boolean>(false);
     const [error, setError] = useState<{ message: string } | null>(null);
     const [errorMissingDataInForm, setErrorMissingDataInForm] = useState<{ message: string } | null>(null);
+    const [errorEmptyCart, setErrorEmptyCart] = useState<boolean>(false);
     const [placeOrderSuccess, setPlaceOrderSuccess] = useState<boolean>(false);
     const [showPlaceOrderSuccessMessage, setShowPlaceOrderSuccessMessage] =
         useState<boolean>(false);
@@ -90,7 +91,6 @@ export default function CartProcessing() {
         setErrorMissingDataInForm(null);
         return true; // Validation successful
     };
-
 
     const handlePlaceOrderButton = async () => {
         setError(null);
@@ -227,11 +227,25 @@ export default function CartProcessing() {
                                     total_price
                                 )}
                             </div>
+                            {errorEmptyCart && (
+                                <div className="error-message-div mt-3">
+                                    <Alert severity="info" className="error-message">
+                                        Pre pokračovanie pridajte do košíku aspoň jeden produkt
+                                    </Alert>
+                                </div>
+                            )}
                             <div className="d-flex pt-4 justify-content-end">
                                 <Button
                                     label="Pokračovať"
                                     className="move-btn next-step"
-                                    onClick={() => stepperRef.current.nextCallback()}
+                                    onClick={() =>{
+                                        if (!isCartEmpty()){
+                                            stepperRef.current.nextCallback()
+                                        }else {
+                                            setErrorEmptyCart(true)
+                                        }
+                                    }
+                                    }
                                 />
                             </div>
                         </StepperPanel>
