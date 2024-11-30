@@ -46,7 +46,7 @@ export function RegisterForm() {
             setRegisterSuccess(true);
             setShowRegisterSuccessMessage(true);
         } catch (error) {
-            setError({ message: (error as Error).message || "Registrácia sa nepodarila. Skúste to znovu." });
+            setError({ message: (error as Error).message });
         }finally {
             setLoading(false)
         }

@@ -37,6 +37,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             localStorage.setItem('isLoggedIn', 'true');
             setIsLoggedIn(true);
         } catch (error) {
+            console.log((error as Error).message);
             throw error;
         }
 
