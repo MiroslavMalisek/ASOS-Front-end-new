@@ -11,6 +11,7 @@ import {PlaceOrderDTO} from "./orderDTOs/PlaceOrderDTO.ts";
 import {ProductInOrderDTO} from "./orderDTOs/ProductInOrderDTO.ts";
 import {ProductInPlaceOrderDTO} from "./orderDTOs/ProductInPlaceOrderDTO.ts";
 import { UserDataAllDTO } from "./userDTOs/UserDataAllDTO.ts";
+import {UserDataInProfileDTO} from "./userDTOs/UserDataInProfileDTO.ts";
 
 const products: ProductDTO[] = [
     {id: 1, img_path: "imgs/iphone.webp", name: "Iphone", category_id: 1, category_name: "Mobily", short_description: "Toto je Iphone short popis",
@@ -45,18 +46,25 @@ const loginResponse: LoginResponseDTO = {
 const userData: UserDataDTO = {first_name: "Miroslav", last_name: "Malíšek", street: "Kvetná", house_number: "9B",
     zip_code: "89204", city: "Bratislava", country: "Slovensko", phone: "+421915076851"};
 
-const userDataEmail: UserDataAllDTO =
+
+const userDataAll: UserDataAllDTO =
+    {
+        first_name: "Miroslav",
+        last_name: "Malíšek",
+        street: "Kvetná",
+        house_number: "9B",
+        zip_code: "89204",
+        city: "Bratislava",
+        country: "Slovensko",
+        email: "example@ex.com",
+        phone: "+421915076851"
+    }
+
+const userDataInProfile: UserDataInProfileDTO =
 {
-    first_name: "Miroslav", 
-    last_name: "Malíšek",
-    street: "Kvetná", 
-    house_number: "9B",
-    zip_code: "89204",
-    city: "Bratislava", 
-    country: "Slovensko",
-    email: "example@ex.com",
-    phone: "+421915076851"
+    user: userDataAll
 };
+
 
 const productsInOrder0: ProductInOrderDTO[] = [
     {id: 1, name: "IPhone", img_path: "imgs/iphone.webp"},
@@ -118,13 +126,13 @@ const productsInPlaceOrder1: ProductInPlaceOrderDTO[] = [
 ]
 
 export const placeOrder0: PlaceOrderDTO = {
-    customer: userDataEmail,
+    customer: userDataAll,
     products_in_order: productsInPlaceOrder0,
     total_price: 2689.77,
 }
 
 export const placeOrder1: PlaceOrderDTO = {
-    customer: userDataEmail,
+    customer: userDataAll,
     products_in_order: productsInPlaceOrder1,
     total_price: 1630.0,
 }
@@ -239,11 +247,11 @@ export const MockService: IApiService = {
         });
     },
 
-    async getUserData(): Promise<UserDataAllDTO> {
+    async getUserData(): Promise<UserDataInProfileDTO> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 if (userData){
-                    resolve(userDataEmail);
+                    resolve(userDataInProfile);
                 } else {
                     reject(new Error("Dáta sa nepodarilo získať"));
                 }
@@ -263,11 +271,19 @@ export const MockService: IApiService = {
         });
     },*/
 
-    async changeUserData(userData: UserDataDTO): Promise<UserDataDTO> {
+    async changeUserData(userData: UserDataDTO): Promise<UserDataInProfileDTO> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 if (userData.first_name === "Peter") {
-                    resolve(userData);
+                    userDataInProfile.user.zip_code = userData.zip_code
+                    userDataInProfile.user.city = userData.city
+                    userDataInProfile.user.country = userData.country
+                    userDataInProfile.user.first_name = userData.first_name
+                    userDataInProfile.user.last_name = userData.last_name
+                    userDataInProfile.user.street = userData.street
+                    userDataInProfile.user.house_number = userData.house_number
+                    userDataInProfile.user.phone = userData.phone
+                    resolve(userDataInProfile);
                 } else {
                     reject(new Error("Meno sa nezhoduje s predpokladom."));
                 }

@@ -39,7 +39,7 @@ const ProductItemInProductList = ({
           <span className="product-price">{formatCurrency(product.price)}</span>
           <div className="mt-auto">
             {quantity === 0 ? (
-                <AddToCartButton productId={product.id} />
+                <AddToCartButton product={product} />
             ) : (
               <div
                 className="d-flex align=items-center flex-column"
@@ -54,7 +54,7 @@ const ProductItemInProductList = ({
                     V košíku: <></>
                     <span className="fs-3">{quantity}</span>
                   </div>
-                  <IncreaseCartItemCuantityButton productId={product.id}/>
+                  <IncreaseCartItemCuantityButton product={product}/>
                 </div>
                 <RemoveFromCartButton productId={product.id} />
               </div>

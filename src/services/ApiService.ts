@@ -8,8 +8,8 @@ import {PasswordChangeDTO} from "./userDTOs/PasswordChangeDTO.ts";
 import {UserDataDTO} from "./userDTOs/UserDataDTO.ts";
 import {OrderDTO} from "./orderDTOs/OrderDTO.ts";
 import {PlaceOrderDTO} from "./orderDTOs/PlaceOrderDTO.ts";
-import {UserDataAllDTO} from "./userDTOs/UserDataAllDTO.ts";
 import {ErrorDTO} from "./userDTOs/ErrorDTO.ts";
+import {UserDataInProfileDTO} from "./userDTOs/UserDataInProfileDTO.ts";
 
 export const ApiService: IApiService = {
 
@@ -26,12 +26,12 @@ export const ApiService: IApiService = {
                 },
             });
             if (!response.ok) {
-                throw new Error(`Failed to fetch cart data: ${response.statusText}`);
+                throw new Error(`Nepodarilo sa načítať produkty`);
             }
             return await response.json();
         } catch (error) {
-            console.error('Error fetching cart data:', error);
-            throw error; // Propagate error for handling in the calling function
+            console.error(error);
+            throw error;
         }
     },
 
@@ -46,11 +46,11 @@ export const ApiService: IApiService = {
                 },
             });
             if (!response.ok) {
-                throw new Error(`Failed to fetch categories: ${response.statusText}`);
+                throw new Error("Nepodarilo sa načítať kategórie tovarov");
             }
             return await response.json();
         } catch (error) {
-            console.error('Error fetching categories data:', error);
+            console.error(error);
             throw error;
         }
     },
@@ -66,11 +66,11 @@ export const ApiService: IApiService = {
                 },
             });
             if (!response.ok) {
-                throw new Error(`Failed to fetch products by category: ${response.statusText}`);
+                throw new Error("Nepodarilo sa načítať produkty danej kategórie");
             }
             return await response.json();
         } catch (error) {
-            console.error('Error fetching prod. categories data:', error);
+            console.error(error);
             throw error;
         }
     },
@@ -87,11 +87,11 @@ export const ApiService: IApiService = {
                 },
             });
             if (!response.ok) {
-                throw new Error(`Failed to fetch products by string: ${response.statusText}`);
+                throw new Error("Nepodarilo sa načítať produkty s daným výrazom");
             }
             return await response.json();
         } catch (error) {
-            console.error('Error fetching products by string:', error);
+            console.error(error);
             throw error;
         }
     },
@@ -107,16 +107,16 @@ export const ApiService: IApiService = {
                 },
             });
             if (!response.ok) {
-                throw new Error(`Failed to fetch Product: ${response.statusText}`);
+                throw new Error("Daný produkt neexistuje");
             }
             return await response.json();
         } catch (error) {
-            console.error('Error fetching product:', error);
+            console.error(error);
             throw error;
         }
     },
 
-    async getUserData(): Promise<UserDataAllDTO> {
+    async getUserData(): Promise<UserDataInProfileDTO> {
         let endpoint = `/user`;
         let url = `${this.BASE_URL}${endpoint}`
         try {
@@ -125,18 +125,21 @@ export const ApiService: IApiService = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                credentials: "include"
             });
             if (!response.ok) {
-                throw new Error(`Failed to fetch User data: ${response.statusText}`);
+                const errorResponse: ErrorDTO = await response.json().catch(() => ({ message: 'Neznáma chyba.' })); // Default error if parsing fails
+                const errorMessage = errorResponse.message;
+                throw new Error(errorMessage);
             }
             return await response.json();
         } catch (error) {
-            console.error('Error fetching user data:', error);
-            throw error;
+            console.log(error instanceof Error ? error.message : 'Neznáma chyba.');
+            throw new Error(error instanceof Error ? error.message : 'Neznáma chyba.');
         }
     },
 
-    async changeUserData(userData: UserDataDTO): Promise<UserDataDTO> {
+    async changeUserData(userData: UserDataDTO): Promise<UserDataInProfileDTO> {
         let endpoint = `/user`;
         let url = `${this.BASE_URL}${endpoint}`
         try {
@@ -146,14 +149,17 @@ export const ApiService: IApiService = {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(userData),
+                credentials: "include"
             });
             if (!response.ok) {
-                throw new Error(`Failed to update User data: ${response.statusText}`);
+                const errorResponse: ErrorDTO = await response.json().catch(() => ({ message: 'Neznáma chyba.' })); // Default error if parsing fails
+                const errorMessage = errorResponse.message;
+                throw new Error(errorMessage);
             }
             return await response.json();
         } catch (error) {
-            console.error('Error updating user data:', error);
-            throw error;
+            console.log(error instanceof Error ? error.message : 'Neznáma chyba.');
+            throw new Error(error instanceof Error ? error.message : 'Neznáma chyba.');
         }
     },
 
@@ -167,14 +173,17 @@ export const ApiService: IApiService = {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(passwordData),
+                credentials: "include"
             });
             if (!response.ok) {
-                throw new Error(`Failed to change password: ${response.statusText}`);
+                const errorResponse: ErrorDTO = await response.json().catch(() => ({ message: 'Neznáma chyba.' })); // Default error if parsing fails
+                const errorMessage = errorResponse.message;
+                throw new Error(errorMessage);
             }
             return await response.json();
         } catch (error) {
-            console.error('Error changing password:', error);
-            throw error;
+            console.log(error instanceof Error ? error.message : 'Neznáma chyba.');
+            throw new Error(error instanceof Error ? error.message : 'Neznáma chyba.');
         }
     },
 
@@ -210,6 +219,7 @@ export const ApiService: IApiService = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                credentials: 'include',
                 body: JSON.stringify(loginData),
             });
             if (!response.ok) {
@@ -233,15 +243,17 @@ export const ApiService: IApiService = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                credentials: 'same-origin'
+                credentials: 'include'
             });
             if (!response.ok) {
-                throw new Error(`Failed to log out: ${response.statusText}`);
+                const errorResponse: ErrorDTO = await response.json().catch(() => ({ message: 'Neznáma chyba. Skúste sa prihlásiť znovu.' })); // Default error if parsing fails
+                const errorMessage = errorResponse.errors;
+                throw new Error(errorMessage);
             }
             return await response.json();
         } catch (error) {
-            console.error('Error logging out:', error);
-            throw error;
+            console.log(error instanceof Error ? error.message : 'Neznáma chyba. Skúste sa prihlásiť znovu.');
+            throw new Error(error instanceof Error ? error.message : 'Neznáma chyba. Skúste sa prihlásiť znovu.');
         }
     },
 
@@ -255,14 +267,17 @@ export const ApiService: IApiService = {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(order),
+                credentials: "include"
             });
             if (!response.ok) {
-                throw new Error(`Failed to Place order: ${response.statusText}`);
+                const errorResponse: ErrorDTO = await response.json().catch(() => ({ message: 'Neznáma chyba.' })); // Default error if parsing fails
+                const errorMessage = errorResponse.message;
+                throw new Error(errorMessage);
             }
             return await response.json();
         } catch (error) {
-            console.error('Error placing order:', error);
-            throw error;
+            console.log(error instanceof Error ? error.message : 'Neznáma chyba.');
+            throw new Error(error instanceof Error ? error.message : 'Neznáma chyba.');
         }
     },
 
@@ -275,14 +290,17 @@ export const ApiService: IApiService = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                credentials: "include"
             });
             if (!response.ok) {
-                throw new Error(`Failed to get orders: ${response.statusText}`);
+                const errorResponse: ErrorDTO = await response.json().catch(() => ({ message: 'Neznáma chyba.' })); // Default error if parsing fails
+                const errorMessage = errorResponse.message;
+                throw new Error(errorMessage);
             }
             return await response.json();
         } catch (error) {
-            console.error('Error getting orders:', error);
-            throw error;
+            console.log(error instanceof Error ? error.message : 'Neznáma chyba.');
+            throw new Error(error instanceof Error ? error.message : 'Neznáma chyba.');
         }
     },
 
@@ -292,4 +310,12 @@ export const ApiService: IApiService = {
     },*/
 
 
+
+
 }
+/*function getCookie(name: string): string {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop()!.split(';').shift()!;
+    return "";
+}*/

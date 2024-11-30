@@ -1,25 +1,24 @@
-import { createContext, ReactNode, useContext, useState } from "react"
+import {createContext, ReactNode, useContext, useState} from "react"
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { ShoppingCart } from "../../components/shoppingCart/ShoppingCart";
+import {ProductDTO} from "../../services/productDTOs/ProductDTO.ts";
+import {CartItem} from "./CartItem.ts";
 
 type ShoppingCartProviderProps = {
     children: ReactNode;
 };
 
-type CartItem = {
-    id: number;
-    quantity: number;
-};
 
 type ShoppingCartContext = {
     openCart: () => void;
     closeCart: () => void;
-    getItemQuantity: (id: number) => number;
-    increaseCartQuantity: (id: number) => void;
-    decreaseCartQuantity: (id: number) => void;
-    removeFromCart: (id: number) => void;
+    getItemQuantity: (productId: number) => number;
+    increaseCartQuantity: (product: ProductDTO) => void;
+    decreaseCartQuantity: (productId: number) => void;
+    removeFromCart: (productId: number) => void;
     clearCart: () => void;
     cartQuantity: number;
+    isCartEmpty: () => boolean;
     cartItems: CartItem[];
 }
 
@@ -45,33 +44,46 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     const openCart = () => setIsOpen(true);
     const closeCart = () => setIsOpen(false);
 
-    function getItemQuantity(id: number) {
-        return cartItems.find((item) => item.id === id)?.quantity || 0;
+    function getItemQuantity(productId: number) {
+        return cartItems.find((item) => item.id === productId)?.quantity || 0;
     }
 
-    function increaseCartQuantity(id: number) {
+    function increaseCartQuantity(product: ProductDTO) {
+
         setCartItems((currItems) => {
-            if (currItems.find((item) => item.id === id) == null) {
-                return [...currItems, {id, quantity: 1 }];  // includes all the existing items ...currItems plus a new item {id, quantity: 1}
+            const existingItem = currItems.find((item) => item.id === product.id);
+
+            if (existingItem == null) {
+                console.log("Product not found in cart, adding:", JSON.stringify(product)); // Log when adding
+                const newItem = {
+                    id: product.id,
+                    quantity: 1,
+                    name: product.name,
+                    photo_path: import.meta.env.VITE_BE_BASE_URL+"/"+product.img_path,
+                    price: product.price,
+                };
+                console.log("New cart item being added:", newItem); // Log the new item
+
+                return [...currItems, newItem]; // Add new item to the cart
             } else {
-                return currItems.map((item) => {
-                    if (item.id === id) {
-                        return { ...item, quantity: item.quantity + 1};
-                    } else {
-                        return item;
-                    }
-                });
+                console.log("Product found in cart, updating quantity:", JSON.stringify(existingItem)); // Log when updating
+                return currItems.map((item) =>
+                    item.id === product.id
+                        ? { ...item, quantity: item.quantity + 1 }
+                        : item
+                );
             }
         });
     }
 
-    function decreaseCartQuantity(id: number) {
+
+    function decreaseCartQuantity(productId: number) {
         setCartItems((currItems) => {
-            if (currItems.find((item) => item.id === id)?.quantity === 1) {
-                return currItems.filter((item) => item.id !== id);
+            if (currItems.find((item) => item.id === productId)?.quantity === 1) {
+                return currItems.filter((item) => item.id !== productId);
             } else {
                 return currItems.map((item) => {
-                    if (item.id === id) {
+                    if (item.id === productId) {
                         return { ...item, quantity: item.quantity - 1 };
                     } else {
                         return item;
@@ -81,15 +93,20 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         });
     }
 
-    function removeFromCart(id: number) {
+    function removeFromCart(productId: number) {
         setCartItems((currItems) => {
-            return currItems.filter((item) => item.id !== id);
+            return currItems.filter((item) => item.id !== productId);
         });
+    }
+
+    function isCartEmpty() {
+        return cartItems.length === 0;
     }
 
     function clearCart() {
         setCartItems([]);
     }
+
   
     return (
     <>
@@ -101,6 +118,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
                 increaseCartQuantity,
                 decreaseCartQuantity,
                 removeFromCart,
+                isCartEmpty,
                 clearCart,
                 cartQuantity,
                 cartItems

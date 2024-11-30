@@ -20,7 +20,7 @@ const ProductListBySearch = ({ searchQuery } : {searchQuery: string}) => {
                 const filteredProducts = await apiService.getProductsBySearchString(searchQuery);
                 setProducts(filteredProducts);
             } catch (error) {
-                setError((error as Error).message || "Nepodarilo sa získať produkty");
+                setError((error as Error).message || "Nepodarilo sa načítať produkty");
             } finally {
                 setLoading(false);
             }

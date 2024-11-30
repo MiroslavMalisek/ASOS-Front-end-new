@@ -20,7 +20,7 @@ const ProductListView: React.FC<ProductListViewProps> = ({ isCategory, category,
         <>
             {error ? (
                 <div className="error-message-div mb-3 mt-4">
-                    <Alert variant="filled" severity="error" className="error-message ">
+                    <Alert severity="error" className="error-message ">
                         {error}</Alert>
                 </div>
             ): loading ? (

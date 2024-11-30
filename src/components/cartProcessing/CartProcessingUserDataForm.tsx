@@ -13,7 +13,7 @@ function CartProcessingUserDataForm({ userCartData, handleChange }: CartProcessi
           <Col>
             <Form.Label className="h5 fw-bold">Osobné údaje</Form.Label>
             <Row>
-              <Col>
+              <Col xs={12} lg={6}>
                 <Form.Group className="mb-3" controlId="formGroupName">
                   <Form.Label className="h6">Meno</Form.Label>
                   <Form.Control
@@ -25,7 +25,7 @@ function CartProcessingUserDataForm({ userCartData, handleChange }: CartProcessi
                   />
                 </Form.Group>
               </Col>
-              <Col>
+              <Col xs={12} lg={6}>
                 <Form.Group className="mb-3" controlId="formGroupSurname">
                   <Form.Label className="h6">Priezvisko</Form.Label>
                   <Form.Control
@@ -38,32 +38,32 @@ function CartProcessingUserDataForm({ userCartData, handleChange }: CartProcessi
               </Col>
             </Row>
             <Row>
-              <Col>
+              <Col xs={12} lg={6}>
                 <Form.Group className="mb-3" controlId="formGroupPhone">
-                  <Form.Label className="h6">Telefónne číslo</Form.Label>
+                  <Form.Label className="h6">Email</Form.Label>
                   <Form.Control
-                    type="text"
-                    name="phone"
-                    value={userCartData.phone}
-                    onChange={handleChange}
+                      type="text"
+                      name="email"
+                      value={userCartData.email}
+                      onChange={handleChange}
                   />
                 </Form.Group>
               </Col>
-              <Col>
-              <Form.Group className="mb-3" controlId="formGroupPhone">
-                  <Form.Label className="h6">Email</Form.Label>
+              <Col xs={12} lg={6}>
+                <Form.Group className="mb-3" controlId="formGroupPhone">
+                  <Form.Label className="h6">Telefónne číslo</Form.Label>
                   <Form.Control
-                    type="text"
-                    name="email"
-                    value={userCartData.email}
-                    onChange={handleChange}
+                      type="text"
+                      name="phone"
+                      value={userCartData.phone}
+                      onChange={handleChange}
                   />
                 </Form.Group>
               </Col>
             </Row>
             <Form.Label className="h5 fw-bold">Dodacie údaje</Form.Label>
             <Row>
-              <Col xs={8} sm={9}>
+              <Col xs={12} lg={9}>
                 <Form.Group className="mb-3" controlId="formGroupStreet">
                   <Form.Label className="h6">Ulica</Form.Label>
                   <Form.Control
@@ -74,7 +74,7 @@ function CartProcessingUserDataForm({ userCartData, handleChange }: CartProcessi
                   />
                 </Form.Group>
               </Col>
-              <Col xs={4} sm={3}>
+              <Col xs={12} lg={3}>
                 <Form.Group className="mb-3" controlId="formGroupHouseNumber">
                   <Form.Label className="h6">Číslo domu</Form.Label>
                   <Form.Control
@@ -87,35 +87,31 @@ function CartProcessingUserDataForm({ userCartData, handleChange }: CartProcessi
               </Col>
             </Row>
             <Row>
-              <Col>
-                <Form.Group className="mb-3" controlId="formGroupZipCode">
-                  <Form.Label className="h6">PSČ</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="zip_code"
-                    value={userCartData.zip_code}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-              </Col>
-              <Col></Col>
-            </Row>
-            <Row>
-              <Col>
+              <Col xs={12} lg={9}>
                 <Form.Group className="mb-3" controlId="formGroupCity">
                   <Form.Label className="h6">Mesto</Form.Label>
                   <Form.Control
-                    type="text"
-                    name="city"
-                    value={userCartData.city}
-                    onChange={handleChange}
+                      type="text"
+                      name="city"
+                      value={userCartData.city}
+                      onChange={handleChange}
                   />
                 </Form.Group>
               </Col>
-              <Col></Col>
+              <Col xs={12} lg={3}>
+                <Form.Group className="mb-3" controlId="formGroupZipCode">
+                  <Form.Label className="h6">PSČ</Form.Label>
+                  <Form.Control
+                      type="text"
+                      name="zip_code"
+                      value={userCartData.zip_code}
+                      onChange={handleChange}
+                  />
+                </Form.Group>
+              </Col>
             </Row>
             <Row>
-              <Col>
+              <Col xs={12}>
                 <Form.Group className="mb-3" controlId="formGroupCountry">
                   <Form.Label className="h6">Krajina</Form.Label>
                   <Form.Control

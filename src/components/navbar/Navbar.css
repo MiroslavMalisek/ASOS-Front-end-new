@@ -166,7 +166,8 @@
 }
 
 .cart-badge{
-    margin-right: 4rem;
+    margin-right: 2rem;
+    margin-left: 2rem
 }
 
 .cart-user-section-in-navbar{
