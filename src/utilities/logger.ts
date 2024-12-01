@@ -4,11 +4,29 @@ import log from 'loglevel';
 const LOG_STORAGE_KEY = 'appLogs';
 
 // Helper function to save logs to localStorage
-const saveLogsToStorage = (logMessage: string) => {
+/* const saveLogsToStorage = (logMessage: string) => {
   const existingLogs = JSON.parse(localStorage.getItem(LOG_STORAGE_KEY) || '[]');
   existingLogs.push(logMessage);
   localStorage.setItem(LOG_STORAGE_KEY, JSON.stringify(existingLogs));
-};
+}; */
+
+function addLog(message: string) {
+    const logsKey = "appLogs"; // Key for storing logs in localStorage
+    const newLog = {
+        message,
+        timestamp: new Date().toISOString()
+    };
+
+    // Retrieve existing logs or initialize an empty array
+    const existingLogs = JSON.parse(localStorage.getItem(logsKey) || "[]");
+
+    // Add the new log
+    existingLogs.push(newLog);
+
+    // Save the updated logs array back to localStorage
+    localStorage.setItem(logsKey, JSON.stringify(existingLogs));
+}
+
 
 log.methodFactory = (methodName, level, loggerName) => {
   // Use the default method for logging if available, otherwise fallback to console
@@ -19,7 +37,7 @@ log.methodFactory = (methodName, level, loggerName) => {
     const message = `${timestamp} ${logLevel}: ${args.join(' ')}`;
 
     // save the log to memory
-    saveLogsToStorage(message);
+    addLog(message);
 
     // output the log locally
     rawMethod(message);
