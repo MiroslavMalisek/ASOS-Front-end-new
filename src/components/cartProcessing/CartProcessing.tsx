@@ -21,6 +21,7 @@ import CartProcessingSummary from "./CartProcessingSummary.tsx";
 import { ProductInPlaceOrderDTO } from "../../services/orderDTOs/ProductInPlaceOrderDTO.ts";
 import formatCurrency from "../../utilities/formatCurrency.ts";
 import "./CartProcessingStyling.css"
+import { logger } from "../../utilities/logger.ts";
 
 export default function CartProcessing() {
   const stepperRef = useRef(null);
@@ -79,6 +80,7 @@ export default function CartProcessing() {
         message:
           (error as Error).message || "Objednávka sa nepodarila odoslať.",
       });
+      logger.error((error as Error).message || "Objednávka sa nepodarila odoslať.");
     } finally {
       setLoading(false);
     }
@@ -120,6 +122,8 @@ export default function CartProcessing() {
             (error as Error).message ||
             "Údaje sa nepodarilo získať. Skúste to znovu.",
         });
+        logger.error((error as Error).message ||
+        "Údaje sa nepodarilo získať. Skúste to znovu.");
       } finally {
         setLoadingGetData(false);
       }

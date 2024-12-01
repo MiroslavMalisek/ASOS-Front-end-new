@@ -3,6 +3,7 @@ import {ProductDTO} from "../../services/productDTOs/ProductDTO.ts";
 import {ServiceSelector} from "../../services/ServiceSelector.ts";
 import ProductListView from "./ProductListView.tsx";
 import {CategoryDTO} from "../../services/productDTOs/CategoriesDTO.ts";
+import { logger } from "../../utilities/logger.ts";
 
 const ProductListByCategory = ({ categoryName } : {categoryName: string}) => {
 
@@ -32,10 +33,12 @@ const ProductListByCategory = ({ categoryName } : {categoryName: string}) => {
                 } else {
                     // If no match found, set an error or redirect
                     setError("Zadaná kategória neexistuje");
+                    logger.error("Zadaná kategória neexistuje");
                     setProducts([]); // Clear any previous products
                 }
             } catch (error) {
                 setError((error as Error).message || "Nepodarilo sa získať produkty");
+                logger.error((error as Error).message || "Nepodarilo sa získať produkty");
             } finally {
                 setLoading(false);
             }

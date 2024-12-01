@@ -10,6 +10,7 @@ import {Spinner} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import {Alert} from "@mui/material";
 import {ServiceSelector} from "../../services/ServiceSelector.ts";
+import { logger } from "../../utilities/logger.ts";
 
 
 export function RegisterForm() {
@@ -64,6 +65,7 @@ export function RegisterForm() {
     useEffect(() => {
         // After successful login, display the message and redirect after 3 seconds
         if (registerSuccess) {
+            logger.info("Registrácia bola úspešná. Prebieha presmerovanie na prihlásenie...");
             const timer = setTimeout(() => {
                 setShowRegisterSuccessMessage(false)
                 navigate('/login'); // Redirect to login page

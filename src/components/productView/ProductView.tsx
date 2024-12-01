@@ -13,6 +13,7 @@ import DecreaseCartItemCuantityButton
     from "../cartButtons/decreaseCartItemCuantityBtn/DecreaseCartItemCuantityButton.tsx";
 import IncreaseCartItemCuantityButton
     from "../cartButtons/increaseCartItemCuantityBtn/IncreaseCartItemCuantityButton.tsx";
+import { logger } from "../../utilities/logger.ts";
 
 const ProductView = ({ productId } : {productId: string}) => {
 
@@ -36,6 +37,7 @@ const ProductView = ({ productId } : {productId: string}) => {
                 setProduct(product);
             } catch (error) {
                 setError((error as Error).message || "Nepodarilo sa nájsť produkt");
+                logger.error((error as Error).message || "Nepodarilo sa nájsť produkt");
             } finally {
                 setLoading(false);
             }

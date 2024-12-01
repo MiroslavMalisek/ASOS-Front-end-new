@@ -5,6 +5,7 @@ import {ServiceSelector} from "../../services/ServiceSelector.ts";
 import {Alert} from "@mui/material";
 import {Spinner} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import { logger } from '../../utilities/logger.ts';
 
 const SideBar = () => {
 
@@ -24,6 +25,7 @@ const SideBar = () => {
                 setCategories(categories);
             } catch (error) {
                 setError((error as Error).message || "Nepodarilo sa získať kategórie");
+                logger.error((error as Error).message || "Nepodarilo sa získať kategórie");
             }finally {
                 setLoading(false);
             }

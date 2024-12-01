@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {ServiceSelector} from "../../services/ServiceSelector.ts";
 import {PasswordChangeDTO} from "../../services/userDTOs/PasswordChangeDTO.ts";
 import {Alert} from "@mui/material";
+import { logger } from "../../utilities/logger.ts";
 
 const UserProfilePasswordForm = () => {
 
@@ -38,7 +39,8 @@ const UserProfilePasswordForm = () => {
 
     const checkPasswordsCorrectness = () => {
         if (passwords.new_password !== passwords.new_password_confirm) {
-            setError({message: "Heslá sa nezhodujú."})
+            setError({message: "Heslá sa nezhodujú."});
+            logger.warn("Heslá sa nezhodujú.");
             return false;
         }
         return true;
@@ -54,6 +56,7 @@ const UserProfilePasswordForm = () => {
                 setShowPasswordChangeSuccessMessage(true)
             }catch (error) {
                 setError({ message: (error as Error).message || "Zmena hesla sa nepodarila. Skúste to znovu." });
+                logger.error((error as Error).message || "Zmena hesla sa nepodarila. Skúste to znovu.");
             }finally {
                 setLoading(false)
                 clearPasswordsForm()
@@ -64,6 +67,7 @@ const UserProfilePasswordForm = () => {
     useEffect(() => {
         // After successful pasword change, display the message and dissmiss it after 5 seconds
         if (passwordChangeSuccess) {
+            logger.info("Password successfully changed.");
             const timer = setTimeout(() => {
                 setPasswordChangeSuccess(false);
                 setShowPasswordChangeSuccessMessage(false)

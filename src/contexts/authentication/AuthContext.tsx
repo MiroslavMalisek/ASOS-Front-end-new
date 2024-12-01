@@ -4,6 +4,7 @@ import {LoginFormDataInterface} from "../../components/form/LoginFormDataInterfa
 import {ServiceSelector} from "../../services/ServiceSelector.ts";
 import {LoginDTO} from "../../services/userDTOs/LoginDTO.ts";
 import {LoginResponseDTO} from "../../services/userDTOs/LoginResponseDTO.ts";
+import { logger } from "../../utilities/logger.ts";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -38,6 +39,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setIsLoggedIn(true);
         } catch (error) {
             console.log((error as Error).message);
+            logger.error((error as Error).message);
             throw error;
         }
 
@@ -53,6 +55,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             localStorage.removeItem('isLoggedIn');
             setIsLoggedIn(false);
         }catch (error) {
+            logger.error(error);
             throw error
         }
     };
@@ -68,6 +71,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 export function useAuth() :AuthContextType {
     const context = useContext(AuthContext);
     if (!context) {
+        logger.error("useAuth must be used within an AuthProvider");
         throw new Error("useAuth must be used within an AuthProvider");
     }
     return context;

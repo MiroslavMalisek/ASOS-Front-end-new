@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import {OrderDTO} from "../../services/orderDTOs/OrderDTO.ts";
 import {ServiceSelector} from "../../services/ServiceSelector.ts";
 import {Alert} from "@mui/material";
+import { logger } from '../../utilities/logger.ts';
 
 const UserOrdersList = () => {
 
@@ -22,6 +23,7 @@ const UserOrdersList = () => {
                 setOrders(orders);
             }catch (error) {
                 setError({ message: (error as Error).message || "Objednávky sa nepodarilo získať. Skúste to znovu." });
+                logger.error((error as Error).message || "Objednávky sa nepodarilo získať. Skúste to znovu.");
             }finally {
                 setLoading(false)
             }

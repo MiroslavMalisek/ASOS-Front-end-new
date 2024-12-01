@@ -8,6 +8,7 @@ import {LoginFormDataInterface} from './LoginFormDataInterface.ts'
 import {Spinner} from "react-bootstrap";
 import {useAuth} from "../../contexts/authentication/AuthContext.tsx";
 import {Alert} from "@mui/material";
+import { logger } from "../../utilities/logger.ts";
 
 export function LoginForm() {
 
@@ -41,6 +42,7 @@ export function LoginForm() {
     useEffect(() => {
         // After successful login, display the message and redirect after 3 seconds
         if (loginSuccess) {
+            logger.info("Prihlásenie bolo úspešné. Prebieha presmerovanie na hlavnú stránku...");
             const timer = setTimeout(() => {
                 setShowLoginSuccessMessage(false)
                 navigate('/'); // Redirect to home page

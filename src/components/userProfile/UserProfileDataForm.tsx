@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {UserDataDTO} from "../../services/userDTOs/UserDataDTO.ts";
 import {ServiceSelector} from "../../services/ServiceSelector.ts";
 import {Alert} from "@mui/material";
+import { logger } from "../../utilities/logger.ts";
 
 const UserProfileDataForm = () => {
 
@@ -55,6 +56,7 @@ const UserProfileDataForm = () => {
             setShowDataChangeSuccessMessage(true)
         }catch (error) {
             setError({ message: (error as Error).message || "Údaje sa nepodarilo zmeniť. Skúste to znovu." });
+            logger.error((error as Error).message || "Údaje sa nepodarilo zmeniť. Skúste to znovu.");
         }finally {
             setLoading(false)
         }
@@ -68,6 +70,7 @@ const UserProfileDataForm = () => {
                 setUserData(userData);
             } catch (error) {
                 setError({ message: (error as Error).message || "Údaje sa nepodarilo získať. Skúste to znovu." });
+                logger.error((error as Error).message || "Údaje sa nepodarilo získať. Skúste to znovu.");
             }finally {
                 setLoadingGetData(false);
             }
@@ -79,6 +82,7 @@ const UserProfileDataForm = () => {
     useEffect(() => {
         // After successful data change, display the message and dissmiss it after 5 seconds
         if (dataChangeSuccess) {
+            logger.info("Data successfully changed.");
             const timer = setTimeout(() => {
                 setDataChangeSuccess(false);
                 setShowDataChangeSuccessMessage(false)
