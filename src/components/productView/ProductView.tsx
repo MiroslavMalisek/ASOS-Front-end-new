@@ -52,7 +52,7 @@ const ProductView = ({ productId } : {productId: string}) => {
         <>
             {error ? (
                 <div className="error-message-div mb-3 mt-4">
-                    <Alert variant="filled" severity="error" className="error-message ">
+                    <Alert severity="error" className="error-message ">
                         {error}</Alert>
                 </div>
             ): loading ? (
@@ -89,9 +89,9 @@ const ProductView = ({ productId } : {productId: string}) => {
                                         ? "Nedostupné"
                                         : `Na sklade ${product?.stock} ks`}</p>
                                     <div className="product-price-cart-div">
-                                        <p className="product-view-price my-0 me-4">{formatCurrency(product?.price)}</p>
+                                        <p className="product-view-price my-0 me-4">{product && (formatCurrency(product.price))}</p>
                                         {quantity === 0 ? (
-                                            <AddToCartButton productId={Number(productId)} />
+                                                product && (<AddToCartButton product={product} />)
                                         ) : (
                                             <div
                                                 className="d-flex align=items-center flex-column"
@@ -106,7 +106,7 @@ const ProductView = ({ productId } : {productId: string}) => {
                                                         V košíku: <></>
                                                         <span className="fs-3">{quantity}</span>
                                                     </div>
-                                                    <IncreaseCartItemCuantityButton productId={Number(productId)}/>
+                                                    {product && <IncreaseCartItemCuantityButton product={product}/>}
                                                 </div>
                                             </div>
                                         )}
@@ -150,5 +150,6 @@ function ImageModal({src, alt}: { src: string, alt: string }) {
         </>
     );
 }
+
 
 export default ProductView;

@@ -1,9 +1,9 @@
-import {ProductIdAddToCartButton} from "../IProductIdToCart.ts";
 import {UseShoppingCart} from "../../../contexts/shoppingCart/ShoppingCartContext.tsx";
 import {Button} from "react-bootstrap";
+import {IProductWholeToCart} from "../IProductWholeToCart.ts";
 import { logger } from "../../../utilities/logger.ts";
 
-const IncreaseCartItemCuantityButton = ({ productId }: ProductIdAddToCartButton) => {
+const IncreaseCartItemCuantityButton = ({ product }: IProductWholeToCart) => {
 
     const { increaseCartQuantity } = UseShoppingCart();
 
@@ -12,10 +12,9 @@ const IncreaseCartItemCuantityButton = ({ productId }: ProductIdAddToCartButton)
             className="add-to-cart-button"
             style={{ width: "2.5rem", height: "2.5rem" }}
             onClick={() => {
-                increaseCartQuantity(productId);
-                logger.info('Product\'s amount with id ' + productId + ' has been increased by 1.');
-            }}
-        >
+                increaseCartQuantity(product)}
+                logger.info('Product\'s amount with id ' + product.id + ' has been increased by 1.');
+            }>
             +
         </Button>
 

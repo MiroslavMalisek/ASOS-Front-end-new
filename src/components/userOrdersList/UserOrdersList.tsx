@@ -5,7 +5,9 @@ import {useEffect, useState} from "react";
 import {OrderDTO} from "../../services/orderDTOs/OrderDTO.ts";
 import {ServiceSelector} from "../../services/ServiceSelector.ts";
 import {Alert} from "@mui/material";
+import {formatDateToSK} from "../../utilities/formatDate.ts";
 import { logger } from '../../utilities/logger.ts';
+
 
 const UserOrdersList = () => {
 
@@ -29,7 +31,7 @@ const UserOrdersList = () => {
             }
         };
         fetchOrders();
-    }, [orders]);
+    }, []);
 
     return (
         <>
@@ -53,7 +55,7 @@ const UserOrdersList = () => {
                                 <ListGroup key={index} className="orders-list">
                                     <ListGroup.Item className="orders-list-item my-1 py-4">
                                         <div className="orders-list-item-info mb-4">
-                                            <p>{order.order_date_created}</p>
+                                            <p>{formatDateToSK(order.order_date_created)}</p>
                                             <div>
                                                 Číslo objednávky:
                                                 <span className="order-number">{order.order_number}</span>
@@ -64,7 +66,7 @@ const UserOrdersList = () => {
                                             {order.products.map((product) => (
                                                 <Link key={product.id} to={`/product/${product.id}`}>
                                                     <img
-                                                        src={`/${product.img_path}`}
+                                                        src={`${import.meta.env.VITE_BE_BASE_URL}/${product?.img_path}`}
                                                         alt={product.name}
                                                         className="orders-list-image"
                                                     />

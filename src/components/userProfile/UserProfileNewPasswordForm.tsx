@@ -97,7 +97,7 @@ const UserProfilePasswordForm = () => {
 
             {error &&
                 <div className="error-message-div mb-3 mt-4">
-                    <Alert variant="filled" severity="error" className="error-message ">
+                    <Alert severity="error" className="error-message ">
                         {error.message}
                     </Alert>
                 </div>

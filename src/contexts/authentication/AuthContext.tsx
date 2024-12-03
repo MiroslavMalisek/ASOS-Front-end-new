@@ -4,6 +4,7 @@ import {LoginFormDataInterface} from "../../components/form/LoginFormDataInterfa
 import {ServiceSelector} from "../../services/ServiceSelector.ts";
 import {LoginDTO} from "../../services/userDTOs/LoginDTO.ts";
 import {LoginResponseDTO} from "../../services/userDTOs/LoginResponseDTO.ts";
+import {UseShoppingCart} from "../shoppingCart/ShoppingCartContext.tsx";
 import { logger } from "../../utilities/logger.ts";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -11,6 +12,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
     const apiService = ServiceSelector;
+
+    const {clearCart} = UseShoppingCart();
 
     const [user, setUser] = useState<UserSessionData | null>(() => {
         // Get the initial user data from localStorage if it exists
@@ -54,6 +57,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setUser(null);
             localStorage.removeItem('isLoggedIn');
             setIsLoggedIn(false);
+            clearAllCookies()
+            clearCart()
         }catch (error) {
             logger.error(error);
             throw error
@@ -76,3 +81,12 @@ export function useAuth() :AuthContextType {
     }
     return context;
 }
+
+const clearAllCookies = () => {
+    const cookies = document.cookie.split(';');
+    cookies.forEach(cookie => {
+        const eqPos = cookie.indexOf('=');
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    });
+};

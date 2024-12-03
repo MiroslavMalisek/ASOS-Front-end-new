@@ -1,8 +1,7 @@
 import { Button, Offcanvas, Stack } from "react-bootstrap";
 import { UseShoppingCart } from "../../contexts/shoppingCart/ShoppingCartContext";
-import { CartItem } from "./CartItem";
+import {CartItemInModal} from "./CartItemInModal.tsx";
 import formatCurrency from "../../utilities/formatCurrency";
-import storeItems from "../../data/items.json";
 import { useNavigate } from "react-router-dom";
 import "./ShoppingCart.css"
 
@@ -23,17 +22,12 @@ export function ShoppingCart({ isOpen }: ShoppingCartProps) {
         <Offcanvas.Body>
           <Stack gap={3}>
             {cartItems.map((item) => (
-              <CartItem key={item.id} {...item} />
+              <CartItemInModal key={item.id} {...item} />
             ))}
             <div className="ms-auto fw-bold fs-5">
               Celková suma:{" "}
               {formatCurrency(
-                cartItems.reduce((total, cartItem) => {
-                  const item = storeItems.find(
-                    (item) => item.id === cartItem.id
-                  );
-                  return total + (item?.price || 0) * cartItem.quantity;
-                }, 0)
+                  cartItems.reduce((total, cartItem) => total + cartItem.price * cartItem.quantity, 0)
               )}
             </div>
             <Button

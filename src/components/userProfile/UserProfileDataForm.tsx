@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {UserDataDTO} from "../../services/userDTOs/UserDataDTO.ts";
 import {ServiceSelector} from "../../services/ServiceSelector.ts";
 import {Alert} from "@mui/material";
+import {UserDataInProfileDTO} from "../../services/userDTOs/UserDataInProfileDTO.ts";
 import { logger } from "../../utilities/logger.ts";
 
 const UserProfileDataForm = () => {
@@ -22,6 +23,18 @@ const UserProfileDataForm = () => {
         country: "",
         phone: "",
     });
+
+    const fieldNames: { [key: string]: string } = {
+        first_name: "Meno",
+        last_name: "Priezvisko",
+        email: "Email",
+        street: "Ulica",
+        house_number: "Číslo domu",
+        zip_code: "PSČ",
+        city: "Mesto",
+        country: "Krajina",
+        phone: "Telefónne číslo",
+    };
 
 
     /*const [userData, setFormData] = useState<UserDataDTO>({
@@ -49,9 +62,20 @@ const UserProfileDataForm = () => {
     const handleButtonClick = async () => {
         setError(null)
         setLoading(true)
+        // Validate all fields
+        const emptyFields = Object.entries(userData).filter(([key, value]) => value.trim() === "");
+        if (emptyFields.length > 0) {
+            setError({
+                message: `Nasledujúce polia nemôžu byť prázdne: ${emptyFields
+                    .map(([key]) => fieldNames[key] || key)
+                    .join(", ")}`,
+            });
+            setLoading(false);
+            return;
+        }
         try {
-            const userDataResponse: UserDataDTO = await apiService.changeUserData(userData);
-            setUserData(userDataResponse);
+            const userDataChange: UserDataInProfileDTO= await apiService.changeUserData(userData);
+            setUserData(userDataChange.user);
             setDataChangeSuccess(true);
             setShowDataChangeSuccessMessage(true)
         }catch (error) {
@@ -66,8 +90,9 @@ const UserProfileDataForm = () => {
         const fetchUserData = async () => {
             setLoadingGetData(true);
             try {
-                const userData = await apiService.getUserData();
-                setUserData(userData);
+                const userDataResponse = await apiService.getUserData();
+                setUserData(userDataResponse.user);
+                console.log(userDataResponse.user)
             } catch (error) {
                 setError({ message: (error as Error).message || "Údaje sa nepodarilo získať. Skúste to znovu." });
                 logger.error((error as Error).message || "Údaje sa nepodarilo získať. Skúste to znovu.");
@@ -133,7 +158,7 @@ const UserProfileDataForm = () => {
 
                     {error &&
                         <div className="error-message-div mb-3 mt-4">
-                            <Alert variant="filled" severity="error" className="error-message ">
+                            <Alert severity="error" className="error-message ">
                                 {error.message}
                             </Alert>
                         </div>
