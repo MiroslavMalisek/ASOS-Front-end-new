@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {ProductDTO} from "../../services/productDTOs/ProductDTO.ts";
 import {ServiceSelector} from "../../services/ServiceSelector.ts";
 import ProductListView from "./ProductListView.tsx";
+import { logger } from "../../utilities/logger.ts";
 
 const ProductListBySearch = ({ searchQuery } : {searchQuery: string}) => {
 
@@ -21,6 +22,7 @@ const ProductListBySearch = ({ searchQuery } : {searchQuery: string}) => {
                 setProducts(filteredProducts);
             } catch (error) {
                 setError((error as Error).message || "Nepodarilo sa načítať produkty");
+                logger.error((error as Error).message || "Nepodarilo sa načítať produkty");
             } finally {
                 setLoading(false);
             }

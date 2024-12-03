@@ -18,6 +18,7 @@ import CartProcessingSummary from "./CartProcessingSummary.tsx";
 import {ProductInPlaceOrderDTO} from "../../services/orderDTOs/ProductInPlaceOrderDTO.ts";
 import formatCurrency from "../../utilities/formatCurrency.ts";
 import "./CartProcessingStyling.css"
+import { logger } from "../../utilities/logger.ts";
 
 export default function CartProcessing() {
     const stepperRef = useRef(null);
@@ -46,6 +47,7 @@ export default function CartProcessing() {
         country: "",
         phone: "",
     });
+  
     const fieldNames: { [key: string]: string } = {
         first_name: "Meno",
         last_name: "Priezvisko",
@@ -69,7 +71,13 @@ export default function CartProcessing() {
             ...userCartData,
             [name]: value,
         });
-    };
+  };
+
+  //TODO tento useEfect pouzi ak chceš simulovať chybu celkovej ceny objednávky a aby to potom dalo error
+  /*useEffect(() => {
+        placeOrderExample.total_price = 100
+        console.log(placeOrderExample.total_price)
+    }, [placeOrderExample]);*/
 
     const checkFormField = (): boolean => {
         // Find fields that are empty

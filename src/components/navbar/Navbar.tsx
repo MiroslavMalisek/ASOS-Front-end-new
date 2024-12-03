@@ -18,6 +18,7 @@ import { useAuth } from "../../contexts/authentication/AuthContext.tsx";
 import { Badge } from "@mui/material";
 import { UseShoppingCart } from "../../contexts/shoppingCart/ShoppingCartContext.tsx";
 //import {useNavigate} from 'react-router-dom';
+import { logger } from "../../utilities/logger.ts";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -32,6 +33,8 @@ const Navbar = () => {
       await logout();
       navigate("/");
     } catch (error) {
+      logger.error("Logout failed:",
+        (error as Error).message || "Failed to logout");
       console.error(
         "Logout failed:",
         (error as Error).message || "Failed to logout"

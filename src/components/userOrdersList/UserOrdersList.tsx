@@ -6,6 +6,8 @@ import {OrderDTO} from "../../services/orderDTOs/OrderDTO.ts";
 import {ServiceSelector} from "../../services/ServiceSelector.ts";
 import {Alert} from "@mui/material";
 import {formatDateToSK} from "../../utilities/formatDate.ts";
+import { logger } from '../../utilities/logger.ts';
+
 
 const UserOrdersList = () => {
 
@@ -22,7 +24,8 @@ const UserOrdersList = () => {
                 const orders = await apiService.getOrders()
                 setOrders(orders);
             }catch (error) {
-                setError({ message: (error as Error).message });
+                setError({ message: (error as Error).message || "Objednávky sa nepodarilo získať. Skúste to znovu." });
+                logger.error((error as Error).message || "Objednávky sa nepodarilo získať. Skúste to znovu.");
             }finally {
                 setLoading(false)
             }

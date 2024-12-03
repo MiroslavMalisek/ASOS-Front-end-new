@@ -10,6 +10,8 @@ import {OrderDTO} from "./orderDTOs/OrderDTO.ts";
 import {PlaceOrderDTO} from "./orderDTOs/PlaceOrderDTO.ts";
 import {ErrorDTO} from "./userDTOs/ErrorDTO.ts";
 import {UserDataInProfileDTO} from "./userDTOs/UserDataInProfileDTO.ts";
+import { logger } from "../utilities/logger.ts";
+import { log } from "console";
 
 export const ApiService: IApiService = {
 
@@ -31,6 +33,7 @@ export const ApiService: IApiService = {
             return await response.json();
         } catch (error) {
             console.error(error);
+            logger.error(error);
             throw error;
         }
     },
@@ -51,6 +54,7 @@ export const ApiService: IApiService = {
             return await response.json();
         } catch (error) {
             console.error(error);
+            logger.error(error);
             throw error;
         }
     },
@@ -71,6 +75,7 @@ export const ApiService: IApiService = {
             return await response.json();
         } catch (error) {
             console.error(error);
+            logger.error(error);
             throw error;
         }
     },
@@ -92,6 +97,7 @@ export const ApiService: IApiService = {
             return await response.json();
         } catch (error) {
             console.error(error);
+            logger.error(error);
             throw error;
         }
     },
@@ -112,6 +118,7 @@ export const ApiService: IApiService = {
             return await response.json();
         } catch (error) {
             console.error(error);
+            logger.error(error);
             throw error;
         }
     },
@@ -135,6 +142,7 @@ export const ApiService: IApiService = {
             return await response.json();
         } catch (error) {
             console.log(error instanceof Error ? error.message : 'Neznáma chyba.');
+            logger.error(error instanceof Error ? error.message : 'Neznáma chyba.');
             throw new Error(error instanceof Error ? error.message : 'Neznáma chyba.');
         }
     },
@@ -159,6 +167,7 @@ export const ApiService: IApiService = {
             return await response.json();
         } catch (error) {
             console.log(error instanceof Error ? error.message : 'Neznáma chyba.');
+            logger.error(error instanceof Error ? error.message : 'Neznáma chyba.');
             throw new Error(error instanceof Error ? error.message : 'Neznáma chyba.');
         }
     },
@@ -183,6 +192,7 @@ export const ApiService: IApiService = {
             return await response.json();
         } catch (error) {
             console.log(error instanceof Error ? error.message : 'Neznáma chyba.');
+            logger.error(error instanceof Error ? error.message : 'Neznáma chyba.');
             throw new Error(error instanceof Error ? error.message : 'Neznáma chyba.');
         }
     },
@@ -206,6 +216,7 @@ export const ApiService: IApiService = {
             return await response.json();
         } catch (error) {
             console.log(error instanceof Error ? error.message : 'Neznáma chyba. Skúste sa registrovať znovu.');
+            logger.error(error instanceof Error ? error.message : 'Neznáma chyba. Skúste sa registrovať znovu.');
             throw new Error(error instanceof Error ? error.message : 'Neznáma chyba. Skúste sa registrovať znovu.');
         }
     },
@@ -230,6 +241,7 @@ export const ApiService: IApiService = {
             return await response.json();
         } catch (error) {
             console.log(error instanceof Error ? error.message : 'Neznáma chyba. Skúste sa prihlásiť znovu.');
+            logger.error(error instanceof Error ? error.message : 'Neznáma chyba. Skúste sa prihlásiť znovu.');
             throw new Error(error instanceof Error ? error.message : 'Neznáma chyba. Skúste sa prihlásiť znovu.');
         }
     },
@@ -252,8 +264,9 @@ export const ApiService: IApiService = {
             }
             return await response.json();
         } catch (error) {
-            console.log(error instanceof Error ? error.message : 'Neznáma chyba. Skúste sa prihlásiť znovu.');
-            throw new Error(error instanceof Error ? error.message : 'Neznáma chyba. Skúste sa prihlásiť znovu.');
+            console.log(error instanceof Error ? error.message : 'Neznáma chyba. Skúste sa odhlásiť znovu.');
+            logger.error(error instanceof Error ? error.message : 'Neznáma chyba. Skúste sa odhlásiť znovu.');
+            throw new Error(error instanceof Error ? error.message : 'Neznáma chyba. Skúste sa odhlásiť znovu.');
         }
     },
 
@@ -276,8 +289,9 @@ export const ApiService: IApiService = {
             }
             return await response.json();
         } catch (error) {
-            console.log(error instanceof Error ? error.message : 'Neznáma chyba.');
-            throw new Error(error instanceof Error ? error.message : 'Neznáma chyba.');
+            console.log(error instanceof Error ? error.message : 'Neznáma chyba. Skúste odoslať objednávku znovu.');
+            logger.error(error instanceof Error ? error.message : 'Neznáma chyba. Skúste odoslať objednávku znovu.');
+            throw new Error(error instanceof Error ? error.message : 'Neznáma chyba. Skúste odoslať objednávku znovu.');
         }
     },
 
@@ -299,8 +313,9 @@ export const ApiService: IApiService = {
             }
             return await response.json();
         } catch (error) {
-            console.log(error instanceof Error ? error.message : 'Neznáma chyba.');
-            throw new Error(error instanceof Error ? error.message : 'Neznáma chyba.');
+            console.log(error instanceof Error ? error.message : 'Neznáma chyba pri získaní objednávok.');
+            logger.error(error instanceof Error ? error.message : 'Neznáma chyba pri získaní objednávok.');
+            throw new Error(error instanceof Error ? error.message : 'Neznáma chyba pri získaní objednávok.');
         }
     },
 
