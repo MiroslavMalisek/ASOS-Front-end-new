@@ -66,7 +66,10 @@ const UserOrdersList = () => {
                                             {order.products.map((product) => (
                                                 <Link key={product.id} to={`/product/${product.id}`}>
                                                     <img
-                                                        src={`${import.meta.env.VITE_BE_BASE_URL}/${product?.img_path}`}
+                                                        //for ApiService
+                                                        //src={`${import.meta.env.VITE_BE_BASE_URL}/${product.img_path}`}
+                                                        //for MockService
+                                                        src={`/${product.img_path}`}
                                                         alt={product.name}
                                                         className="orders-list-image"
                                                     />

@@ -59,7 +59,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
                     id: product.id,
                     quantity: 1,
                     name: product.name,
-                    photo_path: import.meta.env.VITE_BE_BASE_URL+"/"+product.img_path,
+                    photo_path: product.img_path,
                     price: product.price,
                 };
                 console.log("New cart item being added:", newItem); // Log the new item

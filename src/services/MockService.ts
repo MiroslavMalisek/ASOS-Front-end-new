@@ -40,17 +40,17 @@ const categories: CategoryDTO[] = [
 ]
 
 const loginResponse: LoginResponseDTO = {
-    session_token: "0123456789", user_id: 1, first_name: "Miro", last_name: "Nejaký",
+    session_token: "0123456789", user_id: 1, first_name: "Andrej", last_name: "Nejaký",
 }
 
-const userData: UserDataDTO = {first_name: "Miroslav", last_name: "Malíšek", street: "Kvetná", house_number: "9B",
+const userData: UserDataDTO = {first_name: "Andrej", last_name: "Nejaký", street: "Kvetná", house_number: "9B",
     zip_code: "89204", city: "Bratislava", country: "Slovensko", phone: "+421915076851"};
 
 
 const userDataAll: UserDataAllDTO =
     {
-        first_name: "Miroslav",
-        last_name: "Malíšek",
+        first_name: "Andrej",
+        last_name: "Nejaký",
         street: "Kvetná",
         house_number: "9B",
         zip_code: "89204",
@@ -199,11 +199,12 @@ export const MockService: IApiService = {
     async login(loginData: LoginDTO): Promise<LoginResponseDTO> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (loginData.email === "unique@mail.com" && loginData.password === "password") {
+                /*if (loginData.email === "unique@mail.com" && loginData.password === "password") {
                     resolve(loginResponse);
                 } else {
                     reject(new Error("Nesprávny email alebo heslo"));
-                }
+                }*/
+                resolve(loginResponse)
             }, 500);
         });
     },
@@ -211,11 +212,12 @@ export const MockService: IApiService = {
     async register(registerData: RegisterDTO): Promise<void> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (registerData.email !== "example@mail.com") {
+                /*if (registerData.email !== "example@mail.com") {
                     resolve();
                 } else {
                     reject(new Error("Zadaný email už existuje"));
-                }
+                }*/
+                resolve()
             }, 500);
         });
     },
@@ -274,7 +276,7 @@ export const MockService: IApiService = {
     async changeUserData(userData: UserDataDTO): Promise<UserDataInProfileDTO> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (userData.first_name === "Peter") {
+                /*if (userData.first_name === "Peter") {
                     userDataInProfile.user.zip_code = userData.zip_code
                     userDataInProfile.user.city = userData.city
                     userDataInProfile.user.country = userData.country
@@ -286,7 +288,16 @@ export const MockService: IApiService = {
                     resolve(userDataInProfile);
                 } else {
                     reject(new Error("Meno sa nezhoduje s predpokladom."));
-                }
+                }*/
+                userDataInProfile.user.zip_code = userData.zip_code
+                userDataInProfile.user.city = userData.city
+                userDataInProfile.user.country = userData.country
+                userDataInProfile.user.first_name = userData.first_name
+                userDataInProfile.user.last_name = userData.last_name
+                userDataInProfile.user.street = userData.street
+                userDataInProfile.user.house_number = userData.house_number
+                userDataInProfile.user.phone = userData.phone
+                resolve(userDataInProfile);
             }, 500);
         });
     },
@@ -306,11 +317,12 @@ export const MockService: IApiService = {
     placeOrder(order: PlaceOrderDTO): Promise<void> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (order){
+                /*if (order){
                     reject(new Error("Nepodarilo sa vytvoriť objednávku"));
                 }else {
                     resolve()
-                }
+                }*/
+                resolve()
                 /* if (order.total_price != placeOrder0.total_price) {
                     reject(new Error("Celková cena nie je správna"));
                 } else {

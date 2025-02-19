@@ -25,7 +25,10 @@ export function CartItemInModal({ id, name, photo_path, price, quantity }: CartI
           }}
         /> */}
         <Image
-          src={photo_path}
+          //for ApiService
+          //src={`${import.meta.env.VITE_BE_BASE_URL}/${photo_path}`} alt="Obrázok"/>
+          //for MockService
+          src={`/${photo_path}`}
           alt={name}
           className="item-image mr-3"
           style={{ width: "60px" }}
